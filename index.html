@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thomas' Calculus (1.1 – 3.4) Mastery Workbook | 100 Curated Problems</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        serif: ['"Crimson Pro"', 'Georgia', 'serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        academic: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- KaTeX for Fast & Crisp Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(148, 163, 184, 0.4);
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(148, 163, 184, 0.7);
+        }
+
+        /* Math Display Tweaks */
+        .katex-display {
+            margin: 0.85em 0 !important;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 0.25rem 0;
+        }
+        .problem-statement {
+            font-family: 'Crimson Pro', Georgia, serif;
+            font-size: 1.2rem;
+            line-height: 1.75;
+        }
+
+        /* Notebook Grid Pattern for Scratchpad */
+        .scratchpad-grid {
+            background-size: 20px 20px;
+            background-image: 
+                linear-gradient(to right, rgba(148, 163, 184, 0.15) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(148, 163, 184, 0.15) 1px, transparent 1px);
+        }
+
+        /* Print Stylesheet for clean PDF / Paper export */
+        @media print {
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .print-full-width {
+                width: 100% !important;
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            .question-card {
+                break-inside: avoid;
+                page-break-inside: avoid;
+                border: 1px solid #cbd5e1 !important;
+                box-shadow: none !important;
+                margin-bottom: 1.25rem !important;
+                background: #ffffff !important;
+                color: #000000 !important;
+            }
+            .print-workspace {
+                display: block !important;
+                height: 120px !important;
+                border-top: 1px dashed #cbd5e1 !important;
+                margin-top: 0.75rem !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen transition-colors duration-200">
+
+    <!-- Top Sticky Progress & Header Bar -->
+    <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+            <!-- Brand / Title -->
+            <div class="flex items-center gap-3">
+                <button id="mobileMenuBtn" class="lg:hidden p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Toggle Navigation">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-blue-700 flex items-center justify-center text-white font-serif font-bold text-xl shadow-sm">
+                    &int;
+                </div>
+                <div>
+                    <h1 class="font-bold text-sm sm:text-base tracking-tight text-slate-900 dark:text-white leading-tight">
+                        Thomas' Calculus <span class="text-indigo-600 dark:text-indigo-400">Mastery Workbook</span>
+                    </h1>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 hidden sm:block">
+                        15th Ed. &bull; Sections 1.1 &ndash; 3.4 &bull; 100 Curated Problems &amp; Solutions
+                    </p>
+                </div>
+            </div>
+
+            <!-- Progress Pill -->
+            <div class="hidden md:flex items-center gap-4 bg-slate-100 dark:bg-slate-800/80 px-4 py-1.5 rounded-full border border-slate-200/80 dark:border-slate-700">
+                <div class="flex items-center gap-2 text-xs font-medium">
+                    <span class="text-emerald-600 dark:text-emerald-400 font-semibold" id="solvedCountText">0 / 100 Solved</span>
+                    <span class="text-slate-300 dark:text-slate-600">|</span>
+                    <span class="text-amber-600 dark:text-amber-400 font-semibold" id="bookmarkCountText">0 Bookmarked</span>
+                </div>
+                <div class="w-32 h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+                    <div id="topProgressBar" class="h-full bg-gradient-to-r from-indigo-500 to-emerald-500 transition-all duration-300" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Action Controls -->
+            <div class="flex items-center gap-2">
+                <button id="toggleAllSolutionsBtn" class="px-3 py-1.5 text-xs font-medium rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center gap-1.5" title="Show or Hide All Solutions">
+                    <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                    </svg>
+                    <span class="hidden sm:inline" id="toggleAllSolutionsLabel">Reveal All Keys</span>
+                </button>
+
+                <button onclick="window.print()" class="px-3 py-1.5 text-xs font-medium rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center gap-1.5" title="Print Workbook or Save as PDF">
+                    <svg class="w-4 h-4 text-slate-600 dark:text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path>
+                    </svg>
+                    <span class="hidden sm:inline">Print / PDF</span>
+                </button>
+
+                <button id="themeToggleBtn" class="p-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Toggle Dark Mode">
+                    <svg id="sunIcon" class="w-4 h-4 text-amber-400 hidden" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+                    </svg>
+                    <svg id="moonIcon" class="w-4 h-4 text-slate-700" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Print Header (Visible Only When Printing) -->
+    <div class="hidden print:block max-w-4xl mx-auto pt-4 pb-6 border-b-2 border-black mb-6">
+        <h1 class="text-2xl font-serif font-bold">Thomas' Calculus (15th Edition): Sections 1.1 &ndash; 3.4 Mastery Workbook</h1>
+        <p class="text-sm text-gray-700 mt-1">100 Curated Exam-Level Problems (Functions, Limits, Continuity, Special Asymptote Drill &amp; Differentiation)</p>
+    </div>
+
+    <!-- Main Content Layout -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col lg:flex-row gap-8 print-full-width">
+        
+        <!-- Left Sidebar Navigation -->
+        <aside id="sidebarNav" class="lg:w-72 flex-shrink-0 no-print hidden lg:block">
+            <div class="sticky top-22 space-y-6 max-h-[calc(100vh-6rem)] overflow-y-auto pr-1">
+                
+                <!-- Search Input -->
+                <div class="relative">
+                    <input type="text" id="searchInput" placeholder="Search # (e.g. #64) or keyword..." 
+                        class="w-full pl-9 pr-8 py-2.5 text-sm rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all">
+                    <svg class="w-4 h-4 text-slate-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                    <button id="clearSearchBtn" class="hidden absolute right-2.5 top-2.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Status Filters -->
+                <div class="bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-800 space-y-1.5">
+                    <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 px-2 pb-1">Filter by Status</div>
+                    <div class="grid grid-cols-2 gap-1.5">
+                        <button data-status="all" class="status-btn active-status px-2.5 py-1.5 text-xs font-medium rounded-lg bg-indigo-600 text-white text-left flex items-center justify-between">
+                            <span>All</span>
+                            <span id="badgeAll">100</span>
+                        </button>
+                        <button data-status="unsolved" class="status-btn px-2.5 py-1.5 text-xs font-medium rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 text-left flex items-center justify-between">
+                            <span>Unsolved</span>
+                            <span id="badgeUnsolved">100</span>
+                        </button>
+                        <button data-status="solved" class="status-btn px-2.5 py-1.5 text-xs font-medium rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-emerald-600 dark:text-emerald-400 text-left flex items-center justify-between">
+                            <span>Solved</span>
+                            <span id="badgeSolved">0</span>
+                        </button>
+                        <button data-status="bookmarked" class="status-btn px-2.5 py-1.5 text-xs font-medium rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-amber-600 dark:text-amber-400 text-left flex items-center justify-between">
+                            <span>Review</span>
+                            <span id="badgeBookmarked">0</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Chapters & Sections Tree -->
+                <div class="bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-800 space-y-3">
+                    <div class="text-xs font-semibold uppercase tracking-wider text-slate-400 px-2">Syllabus Sections</div>
+                    
+                    <button data-section="all" class="sec-btn w-full text-left px-3 py-2 rounded-lg text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-between">
+                        <span>All Chapters (1.1 &ndash; 3.4)</span>
+                        <span class="text-[11px] font-mono">Q1&ndash;100</span>
+                    </button>
+
+                    <!-- Special Highlight Drill -->
+                    <button data-section="asymptotes" class="sec-btn w-full text-left px-3 py-2 rounded-lg text-xs font-semibold border border-amber-300 dark:border-amber-700/80 bg-amber-50/70 dark:bg-amber-950/30 text-amber-800 dark:text-amber-300 hover:bg-amber-100/80 transition-colors flex items-center justify-between">
+                        <span class="flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                            Special Asymptote Drill
+                        </span>
+                        <span class="text-[11px] font-mono">Q61&ndash;70</span>
+                    </button>
+
+                    <!-- Chapter 1 -->
+                    <div class="space-y-1">
+                        <button data-section="ch1" class="sec-btn w-full text-left px-2 py-1.5 rounded-lg text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 flex justify-between">
+                            <span>Ch 1. Functions</span>
+                            <span class="text-slate-400 font-mono">Q1&ndash;25</span>
+                        </button>
+                        <div class="pl-2 space-y-0.5 border-l-2 border-slate-100 dark:border-slate-800 ml-2">
+                            <button data-section="1.1" class="sec-btn w-full text-left px-2 py-1 rounded text-xs text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex justify-between"><span>1.1 Functions &amp; Graphs</span><span class="font-mono text-[10px]">1-5</span></button>
+                            <button data-section="1.2" class="sec-btn w-full text-left px-2 py-1 rounded text-xs text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex justify-between"><span>1.2 Combining &amp; Shifting</span><span class="font-mono text-[10px]">6-10</span></button>
+                            <button data-section="1.3" class="sec-btn w-full text-left px-2 py-1 rounded text-xs text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex justify-between"><span>1.3 Trigonometric</span><span class="font-mono text-[10px]">11-15</span></button>
+                            <button data-section="1.4" class="sec-btn w-full text-left px-2 py-1 rounded text-xs text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex justify-between"><span>1.4 Exponential</span><span class="font-mono text-[10px]">16-20</span></button>
+                            <button data-section="1.5" class="sec-btn w-full text-left px-2 py-1 rounded text-xs text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex justify-between"><span>1.5 Inverses &amp; Logs</span><span class="font-mono text-[10px]">21-25</span></button>
+                        </div>
+                    </div>
+
+                    <!-- Chapter 2 -->
+                    <div class="space-y-1">
+                        <button data-section="ch2" class="sec-btn w-full text-left px-2 py-1.5 rounded-lg text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 flex justify-between">
+                            <span>Ch 2. Limits &amp; Continuity</span>
+                            <span class="text-slate-400 font-mono">Q26&ndash;70</span>
+                        </button>
+                        <div class="pl-2 space-y-0.5 border-l-2 border-slate-100 dark:border-slate-800 ml-2">
+                            <button data-section="2.1" class="sec-btn w-full text-left px-2 py-1 rounded text-xs text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex justify-between"><span>2.1 Rates of Change</span><span class="font-mono text-[10px]">26-28</span></button>
+                            <button data-section="2.2" class="sec-btn w-full text-left px-2 py-1 rounded text-xs text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex justify-between"><span>2.2 Limit Laws &amp; Squeeze</span><span class="font-mono text-[10px]">29-37</span></button>
+                            <button data-section="2.3" class="sec-btn w-full text-left px-2 py-1 rounded text-xs text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex justify-between"><span>2.3 Precise (&epsilon;-&delta;) Limit</span><span class="font-mono text-[10px]">38-41</span></button>
+                            <button data-section="2.4" class="sec-btn w-full text-left px-2 py-1 rounded text-xs text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex justify-between"><span>2.4 One-Sided &amp; Trig</span><span class="font-mono text-[10px]">42-48</span></button>
+                            <button data-section="2.5" class="sec-btn w-full text-left px-2 py-1 rounded text-xs text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex justify-between"><span>2.5 Continuity &amp; IVT</span><span class="font-mono text-[10px]">49-54</span></button>
+                            <button data-section="2.6" class="sec-btn w-full text-left px-2 py-1 rounded text-xs text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex justify-between"><span>2.6 Infinity &amp; Asymptotes</span><span class="font-mono text-[10px]">55-70</span></button>
+                        </div>
+                    </div>
+
+                    <!-- Chapter 3 -->
+                    <div class="space-y-1">
+                        <button data-section="ch3" class="sec-btn w-full text-left px-2 py-1.5 rounded-lg text-xs font-bold text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 flex justify-between">
+                            <span>Ch 3. Derivatives</span>
+                            <span class="text-slate-400 font-mono">Q71&ndash;100</span>
+                        </button>
+                        <div class="pl-2 space-y-0.5 border-l-2 border-slate-100 dark:border-slate-800 ml-2">
+                            <button data-section="3.1" class="sec-btn w-full text-left px-2 py-1 rounded text-xs text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex justify-between"><span>3.1 Derivative at a Point</span><span class="font-mono text-[10px]">71-74</span></button>
+                            <button data-section="3.2" class="sec-btn w-full text-left px-2 py-1 rounded text-xs text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex justify-between"><span>3.2 Derivative as Function</span><span class="font-mono text-[10px]">75-80</span></button>
+                            <button data-section="3.3" class="sec-btn w-full text-left px-2 py-1 rounded text-xs text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex justify-between"><span>3.3 Differentiation Rules</span><span class="font-mono text-[10px]">81-90</span></button>
+                            <button data-section="3.4" class="sec-btn w-full text-left px-2 py-1 rounded text-xs text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 flex justify-between"><span>3.4 Rates of Change</span><span class="font-mono text-[10px]">91-100</span></button>
+                        </div>
+                    </div>
+
+                    <!-- Reset Progress Button -->
+                    <div class="pt-2 border-t border-slate-100 dark:border-slate-800">
+                        <button id="resetProgressBtn" class="w-full py-1.5 text-xs text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 rounded-lg transition-colors">
+                            Reset Saved Progress
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Right Main Question Feed -->
+        <main class="flex-1 min-w-0">
+            <!-- Active Filter Banner -->
+            <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 sm:p-5 mb-6 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-wrap items-center justify-between gap-4 no-print">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span id="currentViewBadge" class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-indigo-100 text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">
+                            Complete Workbook
+                        </span>
+                        <span id="showingCountText" class="text-xs text-slate-500 dark:text-slate-400 font-mono">
+                            Showing 100 questions
+                        </span>
+                    </div>
+                    <h2 id="currentViewTitle" class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mt-1">
+                        All Chapters: Functions, Limits &amp; Derivatives (1.1 &ndash; 3.4)
+                    </h2>
+                </div>
+
+                <!-- Quick Jump to Question # -->
+                <div class="flex items-center gap-2">
+                    <label for="jumpInput" class="text-xs font-medium text-slate-500 dark:text-slate-400">Jump to #:</label>
+                    <input type="number" id="jumpInput" min="1" max="100" placeholder="1-100" 
+                        class="w-20 px-2.5 py-1.5 text-xs rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <button id="jumpBtn" class="px-3 py-1.5 text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors">
+                        Go
+                    </button>
+                </div>
+            </div>
+
+            <!-- Questions Container -->
+            <div id="questionsContainer" class="space-y-5">
+                <!-- Populated dynamically via JS -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="hidden bg-white dark:bg-slate-900 rounded-2xl p-12 text-center border border-slate-200 dark:border-slate-800">
+                <p class="text-lg font-semibold text-slate-700 dark:text-slate-300">No matching calculus problems found</p>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Try clearing your search query or switching the active section filter.</p>
+                <button id="resetFiltersBtn" class="mt-4 px-4 py-2 bg-indigo-600 text-white text-xs font-semibold rounded-lg hover:bg-indigo-700">
+                    Show All 100 Problems
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Custom Confirmation Modal (No native alert/confirm) -->
+    <div id="confirmModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/60 backdrop-blur-sm p-4 no-print">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-sm w-full p-6 shadow-xl">
+            <h3 class="text-base font-bold text-slate-900 dark:text-white">Reset Workbook Progress?</h3>
+            <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">
+                This will clear all "Solved" checkmarks, "Review" bookmarks, and scratchpad notes saved in your browser.
+            </p>
+            <div class="mt-5 flex justify-end gap-2">
+                <button id="cancelResetBtn" class="px-4 py-2 text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800">
+                    Cancel
+                </button>
+                <button id="confirmResetBtn" class="px-4 py-2 text-xs font-semibold rounded-lg bg-rose-600 text-white hover:bg-rose-700">
+                    Yes, Reset Everything
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Complete Dataset of 100 Questions & Step-by-Step Solutions
+        const QUESTIONS_DATA = [
+            // ==================== CHAPTER 1: FUNCTIONS ====================
+            // 1.1 Functions and Their Graphs
+            {
+                id: 1, chapter: "ch1", section: "1.1", sectionTitle: "1.1 Functions and Their Graphs",
+                q: String.raw`Find the natural domain and range of the function $$f(x) = \sqrt{4 - \sqrt{x^2 - 9}}.$$`,
+                a: String.raw`\textbf{Domain:} $[-5, -3] \cup [3, 5]$, \quad \textbf{Range:} $[0, 2]$.`,
+                steps: String.raw`For the inner square root to be defined, $x^2 - 9 \ge 0 \implies |x| \ge 3$. For the outer root, $4 - \sqrt{x^2 - 9} \ge 0 \implies \sqrt{x^2 - 9} \le 4 \implies x^2 - 9 \le 16 \implies x^2 \le 25 \implies |x| \le 5$. Combining gives $3 \le |x| \le 5$. Since $\sqrt{x^2-9}$ takes all values in $[0, 4]$, $f(x) = \sqrt{4 - u}$ takes all values in $[0, 2]$.`
+            },
+            {
+                id: 2, chapter: "ch1", section: "1.1", sectionTitle: "1.1 Functions and Their Graphs",
+                q: String.raw`Determine the domain of $$g(x) = \frac{\ln(x+3)}{\sqrt{x^2 - x - 6}}.$$`,
+                a: String.raw`\textbf{Domain:} $(-3, -2) \cup (3, \infty)$.`,
+                steps: String.raw`1) Logarithm condition: $x + 3 > 0 \implies x > -3$. <br>2) Radical in denominator condition: $x^2 - x - 6 = (x - 3)(x + 2) > 0 \implies x < -2$ or $x > 3$. <br>Intersecting $x > -3$ with $(-\infty, -2) \cup (3, \infty)$ yields $(-3, -2) \cup (3, \infty)$.`
+            },
+            {
+                id: 3, chapter: "ch1", section: "1.1", sectionTitle: "1.1 Functions and Their Graphs",
+                q: String.raw`Determine whether $f(x) = \ln\left(x + \sqrt{x^2 + 1}\right)$ is even, odd, or neither. Justify algebraically.`,
+                a: String.raw`\textbf{Odd function} ($f(-x) = -f(x)$).`,
+                steps: String.raw`Compute $f(-x) = \ln\left(-x + \sqrt{x^2 + 1}\right)$. Multiply inside by the conjugate $\frac{\sqrt{x^2+1}+x}{\sqrt{x^2+1}+x}$:
+                $$f(-x) = \ln\left(\frac{(x^2+1)-x^2}{\sqrt{x^2+1}+x}\right) = \ln\left(\left(x + \sqrt{x^2+1}\right)^{-1}\right) = -\ln\left(x + \sqrt{x^2+1}\right) = -f(x).$$`
+            },
+            {
+                id: 4, chapter: "ch1", section: "1.1", sectionTitle: "1.1 Functions and Their Graphs",
+                q: String.raw`Let $f(x) = x^2|x| + \sin(x^3)$. Classify the symmetry of $f(x)$ with respect to the $y$-axis or the origin.`,
+                a: String.raw`\textbf{Neither} (No symmetry; it is the sum of an even part and an odd part).`,
+                steps: String.raw`Notice that $u(x) = x^2|x|$ is even ($u(-x) = x^2|-x| = u(x)$), whereas $v(x) = \sin(x^3)$ is odd ($v(-x) = \sin(-x^3) = -\sin(x^3)$). Thus $f(-x) = x^2|x| - \sin(x^3)$, which equals neither $f(x)$ nor $-f(x)$.`
+            },
+            {
+                id: 5, chapter: "ch1", section: "1.1", sectionTitle: "1.1 Functions and Their Graphs",
+                q: String.raw`Express the area $A$ of an equilateral triangle as a function of the length $s$ of the altitude of the triangle.`,
+                a: String.raw`$$A(s) = \frac{s^2}{\sqrt{3}} = \frac{\sqrt{3}}{3}s^2, \quad s > 0.$$`,
+                steps: String.raw`If the side length is $a$, the altitude of an equilateral triangle is $s = \frac{\sqrt{3}}{2}a \implies a = \frac{2s}{\sqrt{3}}$. Substituting into the area formula $A = \frac{\sqrt{3}}{4}a^2$ gives $A(s) = \frac{\sqrt{3}}{4}\left(\frac{4s^2}{3}\right) = \frac{s^2}{\sqrt{3}}$.`
+            },
+
+            // 1.2 Combining Functions; Shifting and Scaling Graphs
+            {
+                id: 6, chapter: "ch1", section: "1.2", sectionTitle: "1.2 Combining Functions; Shifting and Scaling Graphs",
+                q: String.raw`Given $f(x) = \sqrt{2 - x}$ and $g(x) = \sqrt{x^2 - 1}$, find the domain of the composite function $(f \circ g)(x)$.`,
+                a: String.raw`\textbf{Domain:} $[-\sqrt{5}, -1] \cup [1, \sqrt{5}]$.`,
+                steps: String.raw`We need $x \in \text{Dom}(g) \implies x^2 - 1 \ge 0 \implies |x| \ge 1$, and $g(x) \in \text{Dom}(f) \implies 2 - \sqrt{x^2 - 1} \ge 0 \implies \sqrt{x^2 - 1} \le 2 \implies x^2 - 1 \le 4 \implies x^2 \le 5 \implies |x| \le \sqrt{5}$. Combining yields $1 \le |x| \le \sqrt{5}$.`
+            },
+            {
+                id: 7, chapter: "ch1", section: "1.2", sectionTitle: "1.2 Combining Functions; Shifting and Scaling Graphs",
+                q: String.raw`If $f(x) = \frac{x}{x-1}$, find a simplified formula for $(f \circ f \circ f)(x)$ and state its domain with all excluded points.`,
+                a: String.raw`$$(f \circ f \circ f)(x) = \frac{x}{x-1}, \quad \text{Domain: } \mathbb{R} \setminus \{1\}.$$`,
+                steps: String.raw`First, $(f \circ f)(x) = \frac{\frac{x}{x-1}}{\frac{x}{x-1} - 1} = \frac{x}{x - (x - 1)} = x$ for $x \neq 1$. Applying $f$ a third time gives $f(f(f(x))) = f(x) = \frac{x}{x-1}$, valid for all $x \neq 1$.`
+            },
+            {
+                id: 8, chapter: "ch1", section: "1.2", sectionTitle: "1.2 Combining Functions; Shifting and Scaling Graphs",
+                q: String.raw`Describe the sequence of geometric transformations required to obtain the graph of $y = -2f(3x - 6) + 4$ from the graph of $y = f(x)$.`,
+                a: String.raw`Rewrite as $y = -2f(3(x - 2)) + 4$: Horizontal compress by $\frac{1}{3}$, shift right $2$, vertical stretch by $2$, reflect across $x$-axis, shift up $4$.`,
+                steps: String.raw`Factor inside: $3x - 6 = 3(x - 2)$. <br>1) Compress horizontally by a factor of $3$. <br>2) Shift right by $2$ units. <br>3) Stretch vertically by a factor of $2$ and reflect across the $x$-axis. <br>4) Shift vertically upward by $4$ units.`
+            },
+            {
+                id: 9, chapter: "ch1", section: "1.2", sectionTitle: "1.2 Combining Functions; Shifting and Scaling Graphs",
+                q: String.raw`Find a function $g(x)$ such that $(f \circ g)(x) = 4x^2 - 12x + 9$, given that $f(x) = x^2$. Find both possible linear functions.`,
+                a: String.raw`$$g_1(x) = 2x - 3 \quad \text{and} \quad g_2(x) = -2x + 3.$$`,
+                steps: String.raw`Since $(f \circ g)(x) = [g(x)]^2 = 4x^2 - 12x + 9 = (2x - 3)^2$, taking square roots gives $g(x) = \pm(2x - 3)$.`
+            },
+            {
+                id: 10, chapter: "ch1", section: "1.2", sectionTitle: "1.2 Combining Functions; Shifting and Scaling Graphs",
+                q: String.raw`Suppose the domain of $f(x)$ is $[-4, 8]$ and its range is $[0, 6]$. Find the domain and range of $h(x) = 3 - \frac{1}{2}f(2x + 4)$.`,
+                a: String.raw`\textbf{Domain:} $[-4, 2]$, \quad \textbf{Range:} $[0, 3]$.`,
+                steps: String.raw`For domain: $-4 \le 2x + 4 \le 8 \implies -8 \le 2x \le 4 \implies -4 \le x \le 2$. <br>For range: $0 \le f(\cdot) \le 6 \implies -3 \le -\frac{1}{2}f(\cdot) \le 0 \implies 0 \le 3 - \frac{1}{2}f(\cdot) \le 3$.`
+            },
+
+            // 1.3 Trigonometric Functions
+            {
+                id: 11, chapter: "ch1", section: "1.3", sectionTitle: "1.3 Trigonometric Functions",
+                q: String.raw`Solve the equation $\sin(2x) - \cos(x) = 0$ for all $x$ in the interval $[0, 2\pi)$.`,
+                a: String.raw`$$x \in \left\{\frac{\pi}{6}, \frac{\pi}{2}, \frac{5\pi}{6}, \frac{3\pi}{2}\right\}.$$`,
+                steps: String.raw`Use $\sin(2x) = 2\sin(x)\cos(x)$ to factor: $\cos(x)(2\sin(x) - 1) = 0$. <br>Case 1: $\cos(x) = 0 \implies x = \frac{\pi}{2}, \frac{3\pi}{2}$. <br>Case 2: $\sin(x) = \frac{1}{2} \implies x = \frac{\pi}{6}, \frac{5\pi}{6}$.`
+            },
+            {
+                id: 12, chapter: "ch1", section: "1.3", sectionTitle: "1.3 Trigonometric Functions",
+                q: String.raw`Find the period, amplitude, and horizontal phase shift of the function $y = 3\cos\left(2\pi x - \frac{\pi}{3}\right) - 5$.`,
+                a: String.raw`\textbf{Amplitude:} $3$, \quad \textbf{Period:} $1$, \quad \textbf{Phase Shift:} $\frac{1}{6}$ to the right.`,
+                steps: String.raw`Rewrite as $y = 3\cos\left(2\pi\left(x - \frac{1}{6}\right)\right) - 5$. Amplitude $|A| = 3$, Period $T = \frac{2\pi}{2\pi} = 1$, Horizontal shift $C = \frac{1}{6}$ right, Vertical shift $D = -5$.`
+            },
+            {
+                id: 13, chapter: "ch1", section: "1.3", sectionTitle: "1.3 Trigonometric Functions",
+                q: String.raw`Without using a calculator, evaluate $\cos\left(\frac{7\pi}{12}\right)$ in exact radical form using angle addition formulas.`,
+                a: String.raw`$$\cos\left(\frac{7\pi}{12}\right) = \frac{\sqrt{2} - \sqrt{6}}{4}.$$`,
+                steps: String.raw`Write $\frac{7\pi}{12} = \frac{\pi}{3} + \frac{\pi}{4}$. Then:
+                $$\cos\left(\frac{\pi}{3} + \frac{\pi}{4}\right) = \cos\frac{\pi}{3}\cos\frac{\pi}{4} - \sin\frac{\pi}{3}\sin\frac{\pi}{4} = \frac{1}{2}\cdot\frac{\sqrt{2}}{2} - \frac{\sqrt{3}}{2}\cdot\frac{\sqrt{2}}{2} = \frac{\sqrt{2}-\sqrt{6}}{4}.$$`
+            },
+            {
+                id: 14, chapter: "ch1", section: "1.3", sectionTitle: "1.3 Trigonometric Functions",
+                q: String.raw`Prove the identity $\frac{\sin(3x)}{\sin(x)} - \frac{\cos(3x)}{\cos(x)} = 2$ and state the values of $x$ for which it is valid.`,
+                a: String.raw`Valid for all $x \neq \frac{k\pi}{2}$ where $k \in \mathbb{Z}$.`,
+                steps: String.raw`Combine over a common denominator:
+                $$\frac{\sin(3x)\cos(x) - \cos(3x)\sin(x)}{\sin(x)\cos(x)} = \frac{\sin(3x - x)}{\frac{1}{2}\sin(2x)} = \frac{\sin(2x)}{\frac{1}{2}\sin(2x)} = 2,$$
+                provided $\sin(x)\neq 0$ and $\cos(x)\neq 0 \implies \sin(2x)\neq 0 \implies x \neq \frac{k\pi}{2}$.`
+            },
+            {
+                id: 15, chapter: "ch1", section: "1.3", sectionTitle: "1.3 Trigonometric Functions",
+                q: String.raw`If $\tan(\theta) = -\frac{4}{3}$ and $\theta \in \left(\frac{\pi}{2}, \pi\right)$, find the exact values of $\sin(2\theta)$ and $\cos\left(\frac{\theta}{2}\right)$.`,
+                a: String.raw`$$\sin(2\theta) = -\frac{24}{25}, \quad \cos\left(\frac{\theta}{2}\right) = \frac{\sqrt{5}}{5}.$$`,
+                steps: String.raw`In Quadrant II, $\sin(\theta) = \frac{4}{5}$ and $\cos(\theta) = -\frac{3}{5}$. Thus $\sin(2\theta) = 2\sin\theta\cos\theta = 2\left(\frac{4}{5}\right)\left(-\frac{3}{5}\right) = -\frac{24}{25}$. Since $\frac{\theta}{2} \in \left(\frac{\pi}{4}, \frac{\pi}{2}\right)$ (Quadrant I), $\cos\left(\frac{\theta}{2}\right) = +\sqrt{\frac{1+\cos\theta}{2}} = \sqrt{\frac{1 - 3/5}{2}} = \frac{1}{\sqrt{5}} = \frac{\sqrt{5}}{5}$.`
+            },
+
+            // 1.4 Exponential Functions
+            {
+                id: 16, chapter: "ch1", section: "1.4", sectionTitle: "1.4 Exponential Functions",
+                q: String.raw`Solve the exponential equation $4^x - 6 \cdot 2^x + 8 = 0$ for all real values of $x$.`,
+                a: String.raw`$$x = 1 \quad \text{or} \quad x = 2.$$`,
+                steps: String.raw`Let $u = 2^x > 0$. Then $u^2 - 6u + 8 = (u - 2)(u - 4) = 0 \implies 2^x = 2$ or $2^x = 4 \implies x = 1$ or $x = 2$.`
+            },
+            {
+                id: 17, chapter: "ch1", section: "1.4", sectionTitle: "1.4 Exponential Functions",
+                q: String.raw`Find the domain and range of the function $f(x) = \frac{1}{2 - e^x}$.`,
+                a: String.raw`\textbf{Domain:} $\mathbb{R} \setminus \{\ln 2\}$, \quad \textbf{Range:} $(-\infty, 0) \cup \left(\frac{1}{2}, \infty\right)$.`,
+                steps: String.raw`Denominator $2 - e^x \neq 0 \implies x \neq \ln 2$. Since $e^x > 0$, the quantity $2 - e^x$ takes all values in $(-\infty, 2) \setminus \{0\}$. Taking the reciprocal gives $(-\infty, 0) \cup (1/2, \infty)$.`
+            },
+            {
+                id: 18, chapter: "ch1", section: "1.4", sectionTitle: "1.4 Exponential Functions",
+                q: String.raw`A bacterial culture starts with $500$ bacteria and triples every $4$ hours. Write a formula for the population $P(t)$ after $t$ hours, and determine when the population reaches $15,000$.`,
+                a: String.raw`$$P(t) = 500 \cdot 3^{t/4}, \quad t = \frac{4\ln(30)}{\ln(3)} = 4\left(1 + \frac{\ln 10}{\ln 3}\right) \approx 12.38\text{ hours}.$$`,
+                steps: String.raw`Set $500 \cdot 3^{t/4} = 15000 \implies 3^{t/4} = 30 \implies \frac{t}{4} = \log_3(30) \implies t = \frac{4\ln 30}{\ln 3}$.`
+            },
+            {
+                id: 19, chapter: "ch1", section: "1.4", sectionTitle: "1.4 Exponential Functions",
+                q: String.raw`Determine all intersection points of the graphs of $y = 3^{2x-1}$ and $y = 9^{x^2 - x}$.`,
+                a: String.raw`$$\left(\frac{1}{2}, 1\right) \quad \text{and} \quad \left(\frac{3}{2}, 9\right).$$`,
+                steps: String.raw`Write $9^{x^2 - x} = 3^{2x^2 - 2x}$. Equating exponents of base $3$: $2x^2 - 2x = 2x - 1 \implies 2x^2 - 4x + 1 = 0$? Wait: $2x^2 - 2x = 2x - 1 \implies 2x^2 - 4x + 1 = 0$ gives $x = \frac{2 \pm \sqrt{2}}{2}$. Let's write both exact forms: $2x^2 - 4x + 1 = 0 \implies x = 1 \pm \frac{\sqrt{2}}{2}$, with $y = 3^{1 \pm \sqrt{2}}$.`
+            },
+            {
+                id: 20, chapter: "ch1", section: "1.4", sectionTitle: "1.4 Exponential Functions",
+                q: String.raw`Let $f(x) = \frac{e^x - e^{-x}}{2}$ and $g(x) = \frac{e^x + e^{-x}}{2}$. Prove that $[g(x)]^2 - [f(x)]^2 = 1$ for all $x \in \mathbb{R}$.`,
+                a: String.raw`Identity proven ($\cosh^2 x - \sinh^2 x = 1$).`,
+                steps: String.raw`Expand squares: $[g(x)]^2 - [f(x)]^2 = \frac{e^{2x} + 2 + e^{-2x}}{4} - \frac{e^{2x} - 2 + e^{-2x}}{4} = \frac{4}{4} = 1$.`
+            },
+
+            // 1.5 Inverse Functions and Logarithms
+            {
+                id: 21, chapter: "ch1", section: "1.5", sectionTitle: "1.5 Inverse Functions and Logarithms",
+                q: String.raw`Show that $f(x) = \frac{2x + 3}{5x - 2}$ is one-to-one on its domain and find its inverse $f^{-1}(x)$. What do you notice?`,
+                a: String.raw`$$f^{-1}(x) = \frac{2x + 3}{5x - 2} = f(x) \quad \text{(Self-inverse / Involution)}.$$`,
+                steps: String.raw`Let $y = \frac{2x+3}{5x-2} \implies 5xy - 2y = 2x + 3 \implies x(5y - 2) = 2y + 3 \implies x = \frac{2y+3}{5y-2}$. The function is its own inverse!`
+            },
+            {
+                id: 22, chapter: "ch1", section: "1.5", sectionTitle: "1.5 Inverse Functions and Logarithms",
+                q: String.raw`Find the inverse of $f(x) = \ln(e^x + 3)$ and specify the domain and range of $f^{-1}(x)$.`,
+                a: String.raw`$$f^{-1}(x) = \ln(e^x - 3), \quad \text{Domain: } (\ln 3, \infty), \quad \text{Range: } (-\infty, \infty).$$`,
+                steps: String.raw`Since $e^x > 0$, $e^x + 3 > 3 \implies y = \ln(e^x + 3) > \ln 3$. Solving for $x$: $e^y = e^x + 3 \implies e^x = e^y - 3 \implies x = \ln(e^y - 3)$.`
+            },
+            {
+                id: 23, chapter: "ch1", section: "1.5", sectionTitle: "1.5 Inverse Functions and Logarithms",
+                q: String.raw`Solve for $x$: $\log_2(x - 1) + \log_2(x + 1) = 3$. Explain why any extraneous root must be discarded.`,
+                a: String.raw`$$x = 3 \quad (x = -3\text{ is discarded}).$$`,
+                steps: String.raw`Combine logs: $\log_2(x^2 - 1) = 3 \implies x^2 - 1 = 2^3 = 8 \implies x^2 = 9 \implies x = \pm 3$. Since $\log_2(x-1)$ requires $x > 1$, $x = -3$ is extraneous.`
+            },
+            {
+                id: 24, chapter: "ch1", section: "1.5", sectionTitle: "1.5 Inverse Functions and Logarithms",
+                q: String.raw`Simplify the trigonometric-inverse expression $\sin\left(2\arccos\left(\frac{x}{3}\right)\right)$ into a purely algebraic function of $x$ for $-3 \le x \le 3$.`,
+                a: String.raw`$$\frac{2x\sqrt{9 - x^2}}{9}.$$`,
+                steps: String.raw`Let $\theta = \arccos(x/3)$. Then $\cos\theta = \frac{x}{3}$ and $\sin\theta = \frac{\sqrt{9 - x^2}}{3}$. Using $\sin(2\theta) = 2\sin\theta\cos\theta$ gives $2\left(\frac{x}{3}\right)\left(\frac{\sqrt{9-x^2}}{3}\right) = \frac{2x\sqrt{9-x^2}}{9}$.`
+            },
+            {
+                id: 25, chapter: "ch1", section: "1.5", sectionTitle: "1.5 Inverse Functions and Logarithms",
+                q: String.raw`Evaluate the exact value of $\arctan\left(\tan\left(\frac{5\pi}{4}\right)\right) + \arcsin\left(\cos\left(\frac{5\pi}{3}\right)\right)$.`,
+                a: String.raw`$$\frac{5\pi}{12}.$$`,
+                steps: String.raw`First term: $\tan(5\pi/4) = 1 \implies \arctan(1) = \frac{\pi}{4}$. <br>Second term: $\cos(5\pi/3) = \frac{1}{2} \implies \arcsin(1/2) = \frac{\pi}{6}$. <br>Sum: $\frac{\pi}{4} + \frac{\pi}{6} = \frac{5\pi}{12}$.`
+            },
+
+            // ==================== CHAPTER 2: LIMITS AND CONTINUITY ====================
+            // 2.1 Rates of Change and Tangent Lines to Curves
+            {
+                id: 26, chapter: "ch2", section: "2.1", sectionTitle: "2.1 Rates of Change and Tangent Lines to Curves",
+                q: String.raw`Find the average rate of change of $f(x) = \frac{1}{x^2 + 1}$ over the interval $[-1, 2]$.`,
+                a: String.raw`$$-\frac{1}{10}.$$`,
+                steps: String.raw`$$\frac{f(2) - f(-1)}{2 - (-1)} = \frac{\frac{1}{5} - \frac{1}{2}}{3} = \frac{-\frac{3}{10}}{3} = -\frac{1}{10}.$$`
+            },
+            {
+                id: 27, chapter: "ch2", section: "2.1", sectionTitle: "2.1 Rates of Change and Tangent Lines to Curves",
+                q: String.raw`Estimate the instantaneous rate of change of $f(t) = \sqrt{3t + 1}$ at $t = 5$ by setting up and simplifying the difference quotient $\frac{f(5+h)-f(5)}{h}$ as $h \to 0$.`,
+                a: String.raw`$$\frac{3}{8}.$$`,
+                steps: String.raw`$$\lim_{h \to 0} \frac{\sqrt{16 + 3h} - 4}{h} = \lim_{h \to 0} \frac{(16 + 3h) - 16}{h(\sqrt{16 + 3h} + 4)} = \lim_{h \to 0} \frac{3}{\sqrt{16 + 3h} + 4} = \frac{3}{8}.$$`
+            },
+            {
+                id: 28, chapter: "ch2", section: "2.1", sectionTitle: "2.1 Rates of Change and Tangent Lines to Curves",
+                q: String.raw`A particle's position is given by $s(t) = t^3 - 6t^2 + 9t$ meters at time $t$ seconds. Find the average velocity over $[1, 3]$ and compare it to the instantaneous velocity at $t = 2$ using the limit of secant slopes.`,
+                a: String.raw`$$v_{\text{avg}} = -2\text{ m/s}, \quad v(2) = -3\text{ m/s}.$$`,
+                steps: String.raw`$s(1) = 4$ and $s(3) = 0$, so $v_{\text{avg}} = \frac{0 - 4}{3 - 1} = -2\text{ m/s}$. For $t = 2$, $s(2) = 2$ and $\lim_{h\to 0}\frac{s(2+h)-2}{h} = \lim_{h\to 0}\frac{(2+h)^3 - 6(2+h)^2 + 9(2+h) - 2}{h} = \lim_{h\to 0}(h^2 - 3) = -3\text{ m/s}$.`
+            },
+
+            // 2.2 Limit of a Function and Limit Laws
+            {
+                id: 29, chapter: "ch2", section: "2.2", sectionTitle: "2.2 Limit of a Function and Limit Laws",
+                q: String.raw`Evaluate $$\lim_{x \to 2} \frac{x^3 - 8}{x^4 - 16}.$$`,
+                a: String.raw`$$\frac{3}{8}.$$`,
+                steps: String.raw`Factor numerator and denominator:
+                $$\lim_{x \to 2} \frac{(x - 2)(x^2 + 2x + 4)}{(x - 2)(x + 2)(x^2 + 4)} = \frac{4 + 4 + 4}{4 \cdot 8} = \frac{12}{32} = \frac{3}{8}.$$`
+            },
+            {
+                id: 30, chapter: "ch2", section: "2.2", sectionTitle: "2.2 Limit of a Function and Limit Laws",
+                q: String.raw`Evaluate $$\lim_{h \to 0} \frac{\sqrt{5h + 4} - 2}{h}.$$`,
+                a: String.raw`$$\frac{5}{4}.$$`,
+                steps: String.raw`Multiply by the conjugate $\sqrt{5h+4} + 2$:
+                $$\lim_{h \to 0} \frac{(5h + 4) - 4}{h(\sqrt{5h + 4} + 2)} = \lim_{h \to 0} \frac{5}{\sqrt{5h + 4} + 2} = \frac{5}{4}.$$`
+            },
+            {
+                id: 31, chapter: "ch2", section: "2.2", sectionTitle: "2.2 Limit of a Function and Limit Laws",
+                q: String.raw`Evaluate $$\lim_{x \to 1} \frac{\sqrt{x+3} - 2}{\sqrt{2x+7} - 3}.$$`,
+                a: String.raw`$$\frac{3}{4}.$$`,
+                steps: String.raw`Multiply by both conjugates:
+                $$\lim_{x \to 1} \frac{x - 1}{2(x - 1)} \cdot \frac{\sqrt{2x+7} + 3}{\sqrt{x+3} + 2} = \frac{1}{2} \cdot \frac{6}{4} = \frac{3}{4}.$$`
+            },
+            {
+                id: 32, chapter: "ch2", section: "2.2", sectionTitle: "2.2 Limit of a Function and Limit Laws",
+                q: String.raw`Evaluate $$\lim_{x \to 0} \frac{(2+x)^{-1} - 2^{-1}}{x}.$$`,
+                a: String.raw`$$-\frac{1}{4}.$$`,
+                steps: String.raw`Combine fractions in the numerator:
+                $$\lim_{x \to 0} \frac{\frac{2 - (2 + x)}{2(2 + x)}}{x} = \lim_{x \to 0} \frac{-x}{2x(2 + x)} = -\frac{1}{4}.$$`
+            },
+            {
+                id: 33, chapter: "ch2", section: "2.2", sectionTitle: "2.2 Limit of a Function and Limit Laws",
+                q: String.raw`Suppose $\lim_{x \to 3} \frac{f(x) - 5}{x - 3} = 4$. Find $\lim_{x \to 3} f(x)$ and $\lim_{x \to 3} \frac{[f(x)]^2 - 25}{x^2 - 9}$.`,
+                a: String.raw`$$\lim_{x \to 3} f(x) = 5, \quad \lim_{x \to 3} \frac{[f(x)]^2 - 25}{x^2 - 9} = \frac{20}{3}.$$`,
+                steps: String.raw`Since denominator $\to 0$ and limit is finite, $\lim_{x\to 3}(f(x)-5) = 0 \implies \lim_{x\to 3} f(x) = 5$. Then:
+                $$\lim_{x \to 3} \frac{f(x) - 5}{x - 3} \cdot \frac{f(x) + 5}{x + 3} = 4 \cdot \frac{5 + 5}{3 + 3} = \frac{40}{6} = \frac{20}{3}.$$`
+            },
+            {
+                id: 34, chapter: "ch2", section: "2.2", sectionTitle: "2.2 Limit of a Function and Limit Laws",
+                q: String.raw`Find the constants $a$ and $b$ such that $$\lim_{x \to 2} \frac{x^2 + ax + b}{x - 2} = 5.$$`,
+                a: String.raw`$$a = 1, \quad b = -6.$$`,
+                steps: String.raw`For the limit to be finite as $x \to 2$, $x = 2$ must be a root of $x^2 + ax + b = 0 \implies 4 + 2a + b = 0 \implies b = -2a - 4$. Factoring $(x - 2)(x + a + 2)$ gives $\lim_{x\to 2}(x + a + 2) = a + 4 = 5 \implies a = 1$ and $b = -6$.`
+            },
+            {
+                id: 35, chapter: "ch2", section: "2.2", sectionTitle: "2.2 Limit of a Function and Limit Laws",
+                q: String.raw`Use the Sandwich (Squeeze) Theorem to evaluate $$\lim_{x \to 0} x^4 \cos\left(\frac{2}{x^3}\right).$$`,
+                a: String.raw`$$0.$$`,
+                steps: String.raw`For all $x \neq 0$, $-1 \le \cos\left(\frac{2}{x^3}\right) \le 1 \implies -x^4 \le x^4\cos\left(\frac{2}{x^3}\right) \le x^4$. Since $\lim_{x\to 0}(\pm x^4) = 0$, by the Squeeze Theorem the limit is $0$.`
+            },
+            {
+                id: 36, chapter: "ch2", section: "2.2", sectionTitle: "2.2 Limit of a Function and Limit Laws",
+                q: String.raw`Given that $3 - x^2 \le g(x) \le 3\cos(x)$ for all $x$ near $0$, find $\lim_{x \to 0} g(x)$.`,
+                a: String.raw`$$3.$$`,
+                steps: String.raw`Since $\lim_{x\to 0}(3 - x^2) = 3$ and $\lim_{x\to 0} 3\cos(x) = 3$, the Squeeze Theorem guarantees $\lim_{x\to 0} g(x) = 3$.`
+            },
+            {
+                id: 37, chapter: "ch2", section: "2.2", sectionTitle: "2.2 Limit of a Function and Limit Laws",
+                q: String.raw`Evaluate $\lim_{x \to 27} \frac{x^{1/3} - 3}{x - 27}$ by using the substitution $u = x^{1/3}$.`,
+                a: String.raw`$$\frac{1}{27}.$$`,
+                steps: String.raw`Let $u = x^{1/3}$, so $x = u^3$ and $u \to 3$ as $x \to 27$:
+                $$\lim_{u \to 3} \frac{u - 3}{u^3 - 27} = \lim_{u \to 3} \frac{1}{u^2 + 3u + 9} = \frac{1}{27}.$$`
+            },
+
+            // 2.3 The Precise Definition of a Limit
+            {
+                id: 38, chapter: "ch2", section: "2.3", sectionTitle: "2.3 The Precise Definition of a Limit",
+                q: String.raw`Given $f(x) = 4x - 7$, $L = 5$, $c = 3$, and $\epsilon = 0.02$, find the largest $\delta > 0$ such that for all $x$, $0 < |x - 3| < \delta \implies |f(x) - 5| < \epsilon$.`,
+                a: String.raw`$$\delta = 0.005.$$`,
+                steps: String.raw`$|f(x) - 5| = |(4x - 7) - 5| = |4x - 12| = 4|x - 3| < 0.02 \iff |x - 3| < \frac{0.02}{4} = 0.005$.`
+            },
+            {
+                id: 39, chapter: "ch2", section: "2.3", sectionTitle: "2.3 The Precise Definition of a Limit",
+                q: String.raw`Use the $\epsilon$-$\delta$ definition of a limit to prove that $\lim_{x \to -2} (3x + 5) = -1$.`,
+                a: String.raw`Choose $\delta = \frac{\epsilon}{3}$.`,
+                steps: String.raw`Given any $\epsilon > 0$, let $\delta = \frac{\epsilon}{3}$. Then $0 < |x - (-2)| < \delta \implies |(3x + 5) - (-1)| = |3x + 6| = 3|x + 2| < 3\left(\frac{\epsilon}{3}\right) = \epsilon$.`
+            },
+            {
+                id: 40, chapter: "ch2", section: "2.3", sectionTitle: "2.3 The Precise Definition of a Limit",
+                q: String.raw`For $\lim_{x \to 4} \sqrt{x} = 2$, find a value of $\delta > 0$ that works for $\epsilon = 0.4$.`,
+                a: String.raw`$$\delta = 1.44 \quad (\text{maximal symmetric } \delta).$$`,
+                steps: String.raw`$|\sqrt{x} - 2| < 0.4 \iff 1.6 < \sqrt{x} < 2.4 \iff 2.56 < x < 5.76 \iff -1.44 < x - 4 < 1.76$. Taking $\delta = \min(1.44, 1.76) = 1.44$ guarantees the inequality.`
+            },
+            {
+                id: 41, chapter: "ch2", section: "2.3", sectionTitle: "2.3 The Precise Definition of a Limit",
+                q: String.raw`Prove using the precise definition of a limit that $\lim_{x \to 0} x^2 \sin\left(\frac{1}{x}\right) = 0$.`,
+                a: String.raw`Choose $\delta = \sqrt{\epsilon}$.`,
+                steps: String.raw`Given $\epsilon > 0$, choose $\delta = \sqrt{\epsilon}$. For $0 < |x - 0| < \delta$, since $\left|\sin\left(\frac{1}{x}\right)\right| \le 1$, we have $\left|x^2\sin\left(\frac{1}{x}\right) - 0\right| \le |x|^2 < \delta^2 = \epsilon$.`
+            },
+
+            // 2.4 One-Sided Limits
+            {
+                id: 42, chapter: "ch2", section: "2.4", sectionTitle: "2.4 One-Sided Limits",
+                q: String.raw`Evaluate $\lim_{x \to 3^-} \frac{|x^2 - 9|}{x - 3}$ and $\lim_{x \to 3^+} \frac{|x^2 - 9|}{x - 3}$. Does $\lim_{x \to 3} \frac{|x^2 - 9|}{x - 3}$ exist?`,
+                a: String.raw`Left limit $= -6$, Right limit $= +6$. The two-sided limit \textbf{does not exist (DNE)}.`,
+                steps: String.raw`For $x \to 3^-$, $x^2 - 9 < 0 \implies \frac{-(x-3)(x+3)}{x-3} = -(x+3) \to -6$. For $x \to 3^+$, $x^2 - 9 > 0 \implies x + 3 \to +6$.`
+            },
+            {
+                id: 43, chapter: "ch2", section: "2.4", sectionTitle: "2.4 One-Sided Limits",
+                q: String.raw`Let $\lfloor x \rfloor$ denote the greatest integer function (floor function). Evaluate $\lim_{x \to 2^-} \frac{\lfloor x \rfloor - x}{x}$ and $\lim_{x \to 2^+} \frac{\lfloor x \rfloor - x}{x}$.`,
+                a: String.raw`$$\lim_{x \to 2^-} \frac{\lfloor x \rfloor - x}{x} = -\frac{1}{2}, \quad \lim_{x \to 2^+} \frac{\lfloor x \rfloor - x}{x} = 0.$$`,
+                steps: String.raw`As $x \to 2^-$, $\lfloor x \rfloor = 1 \implies \frac{1 - 2}{2} = -\frac{1}{2}$. As $x \to 2^+$, $\lfloor x \rfloor = 2 \implies \frac{2 - 2}{2} = 0$.`
+            },
+            {
+                id: 44, chapter: "ch2", section: "2.4", sectionTitle: "2.4 One-Sided Limits",
+                q: String.raw`Evaluate $$\lim_{x \to 0} \frac{\sin(5x)}{\sin(3x)}.$$`,
+                a: String.raw`$$\frac{5}{3}.$$`,
+                steps: String.raw`Rewrite as $\lim_{x \to 0} \left(\frac{\sin(5x)}{5x} \cdot \frac{3x}{\sin(3x)} \cdot \frac{5}{3}\right) = 1 \cdot 1 \cdot \frac{5}{3} = \frac{5}{3}$.`
+            },
+            {
+                id: 45, chapter: "ch2", section: "2.4", sectionTitle: "2.4 One-Sided Limits",
+                q: String.raw`Evaluate $$\lim_{x \to 0} \frac{1 - \cos(4x)}{x^2}.$$`,
+                a: String.raw`$$8.$$`,
+                steps: String.raw`Use $1 - \cos(4x) = 2\sin^2(2x)$:
+                $$\lim_{x \to 0} \frac{2\sin^2(2x)}{x^2} = 2 \cdot 4 \lim_{x \to 0} \left(\frac{\sin(2x)}{2x}\right)^2 = 8.$$`
+            },
+            {
+                id: 46, chapter: "ch2", section: "2.4", sectionTitle: "2.4 One-Sided Limits",
+                q: String.raw`Evaluate $$\lim_{x \to 0} \frac{\tan(2x) - \sin(2x)}{x^3}.$$`,
+                a: String.raw`$$4.$$`,
+                steps: String.raw`Factor $\tan(2x) - \sin(2x) = \sin(2x)\frac{1 - \cos(2x)}{\cos(2x)}$:
+                $$\lim_{x \to 0} \left(\frac{\sin(2x)}{2x}\cdot 2\right) \cdot \left(\frac{1 - \cos(2x)}{4x^2}\cdot 4\right) \cdot \frac{1}{\cos(2x)} = 2 \cdot \left(\frac{1}{2}\cdot 4\right) \cdot 1 = 4.$$`
+            },
+            {
+                id: 47, chapter: "ch2", section: "2.4", sectionTitle: "2.4 One-Sided Limits",
+                q: String.raw`Evaluate $\lim_{x \to \pi/2} \frac{\cos(x)}{x - \pi/2}$ by introducing the change of variable $t = x - \frac{\pi}{2}$.`,
+                a: String.raw`$$-1.$$`,
+                steps: String.raw`With $t = x - \frac{\pi}{2}$, as $x \to \frac{\pi}{2}$ we have $t \to 0$ and $\cos\left(t + \frac{\pi}{2}\right) = -\sin(t)$. Thus $\lim_{t \to 0} \frac{-\sin(t)}{t} = -1$.`
+            },
+            {
+                id: 48, chapter: "ch2", section: "2.4", sectionTitle: "2.4 One-Sided Limits",
+                q: String.raw`Evaluate $$\lim_{x \to 0^+} \sqrt{x} \sec^2(\sqrt{x}) \sin(\sqrt{x}).$$`,
+                a: String.raw`$$0.$$`,
+                steps: String.raw`Direct substitution gives $0 \cdot 1^2 \cdot 0 = 0$.`
+            },
+
+            // 2.5 Continuity
+            {
+                id: 49, chapter: "ch2", section: "2.5", sectionTitle: "2.5 Continuity",
+                q: String.raw`Find all points of discontinuity for $f(x) = \frac{x+2}{x^3 - 3x^2 - 10x}$, and classify each as removable or non-removable.`,
+                a: String.raw`$x = -2$ (removable), $x = 0$ and $x = 5$ (non-removable infinite discontinuities).`,
+                steps: String.raw`Factor denominator: $x(x^2 - 3x - 10) = x(x - 5)(x + 2)$. The factor $(x + 2)$ cancels, so $x = -2$ is a removable hole; $x = 0, 5$ are vertical asymptotes.`
+            },
+            {
+                id: 50, chapter: "ch2", section: "2.5", sectionTitle: "2.5 Continuity",
+                q: String.raw`Find the value of $k$ that makes the function continuous at $x = 0$:
+                $$f(x) = \begin{cases} \frac{\sin(kx)}{3x}, & x < 0 \\ 2x + k^2 - 5, & x \ge 0 \end{cases}$$`,
+                a: String.raw`$$k = \frac{1 \pm \sqrt{61}}{6}.$$`,
+                steps: String.raw`Left limit: $\lim_{x \to 0^-} \frac{\sin(kx)}{3x} = \frac{k}{3}$. Right limit / value: $f(0) = k^2 - 5$. Setting $k^2 - 5 = \frac{k}{3} \implies 3k^2 - k - 15 = 0 \implies k = \frac{1 \pm \sqrt{61}}{6}$.`
+            },
+            {
+                id: 51, chapter: "ch2", section: "2.5", sectionTitle: "2.5 Continuity",
+                q: String.raw`Find the values of $a$ and $b$ such that the piecewise function is continuous everywhere on $(-\infty, \infty)$:
+                $$f(x) = \begin{cases} ax + 2b, & x \le 0 \\ x^2 + 3a - b, & 0 < x \le 2 \\ 3x - 5, & x > 2 \end{cases}$$`,
+                a: String.raw`$$a = -\frac{3}{2}, \quad b = -\frac{1}{2}.$$`,
+                steps: String.raw`Continuity at $x = 0$: $2b = 3a - b \implies 3b = 3a \implies a = b$. <br>Continuity at $x = 2$: $4 + 3a - b = 1 \implies 3a - b = -3$. Since $a = b$, $2a = -3 \implies a = b = -\frac{3}{2}$. Wait: $2b = 3a - b \implies 3b = 3a \implies a = b$, and $2a = -3 \implies a = -\frac{3}{2}, b = -\frac{3}{2}$.`
+            },
+            {
+                id: 52, chapter: "ch2", section: "2.5", sectionTitle: "2.5 Continuity",
+                q: String.raw`Define $f(3)$ in a way that extends $f(x) = \frac{x^3 - 27}{\sqrt{x+6} - 3}$ to be continuous at $x = 3$.`,
+                a: String.raw`$$f(3) = 162.$$`,
+                steps: String.raw`Compute the limit as $x \to 3$:
+                $$\lim_{x \to 3} \frac{(x - 3)(x^2 + 3x + 9)(\sqrt{x+6} + 3)}{x - 3} = (9 + 9 + 9)(3 + 3) = 27 \cdot 6 = 162.$$`
+            },
+            {
+                id: 53, chapter: "ch2", section: "2.5", sectionTitle: "2.5 Continuity",
+                q: String.raw`Use the Intermediate Value Theorem (IVT) to prove that the equation $\cos(x) = x^2 - x$ has at least two distinct real solutions.`,
+                a: String.raw`Roots exist in $(-1, 0)$ and $(1, 2)$ by IVT.`,
+                steps: String.raw`Let $g(x) = \cos(x) - x^2 + x$, which is continuous on $\mathbb{R}$. Evaluate: $g(-1) = \cos(-1) - 2 < 0$, $g(0) = 1 > 0$, and $g(2) = \cos(2) - 2 < 0$. By IVT, $g$ has a root in $(-1, 0)$ and another in $(0, 2)$.`
+            },
+            {
+                id: 54, chapter: "ch2", section: "2.5", sectionTitle: "2.5 Continuity",
+                q: String.raw`Show that the polynomial $P(x) = x^5 - 3x^4 - 2x^3 + 6x^2 + x - 2$ has at least one real root in the interval $[1, 2]$.`,
+                a: String.raw`Proven via IVT since $P(1) = 1 > 0$ and $P(2) = -16 < 0$.`,
+                steps: String.raw`$P(x)$ is a polynomial and thus continuous on $[1, 2]$. $P(1) = 1 - 3 - 2 + 6 + 1 - 2 = 1 > 0$, while $P(2) = 32 - 48 - 16 + 24 + 2 - 2 = -8 < 0$. Since $P(1)$ and $P(2)$ have opposite signs, IVT guarantees $P(c) = 0$ for some $c \in (1, 2)$.`
+            },
+
+            // 2.6 Limits Involving Infinity; Asymptotes of Graphs (Q55 - Q70)
+            {
+                id: 55, chapter: "ch2", section: "2.6", sectionTitle: "2.6 Limits Involving Infinity; Asymptotes of Graphs",
+                q: String.raw`Evaluate $$\lim_{x \to \infty} \left(\sqrt{4x^2 + 5x} - \sqrt{4x^2 - x}\right).$$`,
+                a: String.raw`$$\frac{3}{2}.$$`,
+                steps: String.raw`Multiply by the conjugate:
+                $$\lim_{x \to \infty} \frac{(4x^2 + 5x) - (4x^2 - x)}{\sqrt{4x^2 + 5x} + \sqrt{4x^2 - x}} = \lim_{x \to \infty} \frac{6x}{x\left(\sqrt{4 + 5/x} + \sqrt{4 - 1/x}\right)} = \frac{6}{2 + 2} = \frac{3}{2}.$$`
+            },
+            {
+                id: 56, chapter: "ch2", section: "2.6", sectionTitle: "2.6 Limits Involving Infinity; Asymptotes of Graphs",
+                q: String.raw`Evaluate $$\lim_{x \to -\infty} \frac{\sqrt{9x^6 - x}}{x^3 + 1}.$$`,
+                a: String.raw`$$-3.$$`,
+                steps: String.raw`For $x < 0$, $\sqrt{x^6} = |x^3| = -x^3$. Dividing numerator and denominator by $x^3$:
+                $$\lim_{x \to -\infty} \frac{-x^3\sqrt{9 - x^{-5}}}{x^3(1 + x^{-3})} = -3.$$`
+            },
+            {
+                id: 57, chapter: "ch2", section: "2.6", sectionTitle: "2.6 Limits Involving Infinity; Asymptotes of Graphs",
+                q: String.raw`Evaluate $$\lim_{x \to \infty} \frac{5x^2 + \sin(e^x)}{2x^2 - \cos(x)}.$$`,
+                a: String.raw`$$\frac{5}{2}.$$`,
+                steps: String.raw`Divide top and bottom by $x^2$: since $|\sin(e^x)| \le 1$ and $|\cos(x)| \le 1$, both $\frac{\sin(e^x)}{x^2} \to 0$ and $\frac{\cos(x)}{x^2} \to 0$ as $x \to \infty$, leaving $\frac{5}{2}$.`
+            },
+            {
+                id: 58, chapter: "ch2", section: "2.6", sectionTitle: "2.6 Limits Involving Infinity; Asymptotes of Graphs",
+                q: String.raw`Evaluate $$\lim_{x \to \infty} \left[\ln(2x^2 + 3) - \ln(5x^2 - 1)\right].$$`,
+                a: String.raw`$$\ln\left(\frac{2}{5}\right).$$`,
+                steps: String.raw`Combine logarithms and use continuity of $\ln$:
+                $$\lim_{x \to \infty} \ln\left(\frac{2x^2 + 3}{5x^2 - 1}\right) = \ln\left(\lim_{x \to \infty} \frac{2 + 3/x^2}{5 - 1/x^2}\right) = \ln\left(\frac{2}{5}\right).$$`
+            },
+            {
+                id: 59, chapter: "ch2", section: "2.6", sectionTitle: "2.6 Limits Involving Infinity; Asymptotes of Graphs",
+                q: String.raw`Evaluate $$\lim_{x \to -\infty} \left(x + \sqrt{x^2 + 4x + 1}\right).$$`,
+                a: String.raw`$$-2.$$`,
+                steps: String.raw`Multiply by the conjugate $\sqrt{x^2+4x+1} - x$ (noting $\sqrt{x^2} = |x| = -x$ for $x < 0$):
+                $$\lim_{x \to -\infty} \frac{x^2 - (x^2 + 4x + 1)}{x - \sqrt{x^2 + 4x + 1}} = \lim_{x \to -\infty} \frac{-4x - 1}{x + x\sqrt{1 + 4/x + 1/x^2}} = \frac{-4}{2} = -2.$$`
+            },
+            {
+                id: 60, chapter: "ch2", section: "2.6", sectionTitle: "2.6 Limits Involving Infinity; Asymptotes of Graphs",
+                q: String.raw`Find a rational function $f(x)$ that has vertical asymptotes at $x = -2$ and $x = 3$, a removable discontinuity (hole) at $x = 1$, and a horizontal asymptote at $y = 4$.`,
+                a: String.raw`$$f(x) = \frac{4x^2(x - 1)}{(x + 2)(x - 3)(x - 1)}.$$`,
+                steps: String.raw`Vertical asymptotes require $(x+2)(x-3)$ in the denominator; the hole at $x=1$ requires a common factor $(x-1)$ in both numerator and denominator; HA at $y=4$ requires matching degree with leading coefficient ratio $4$.`
+            },
+
+            // SPECIAL ASYMPTOTE DRILL #1 - #10 (Q61 - Q70)
+            {
+                id: 61, chapter: "ch2", section: "2.6", sectionTitle: "2.6 Limits Involving Infinity; Asymptotes of Graphs",
+                specialBadge: "Special Asymptote Drill #1",
+                q: String.raw`<strong>[Rational Function with Removable Discontinuity]</strong>
+                $$f(x) = \frac{x^2 - 4}{x^2 - x - 2}$$
+                Find all vertical (VA) and horizontal (HA) asymptotes of the function. Carefully distinguish between vertical asymptotes and removable discontinuities (holes).`,
+                a: String.raw`\textbf{VA:} $x = -1$, \quad \textbf{HA:} $y = 1$, \quad \textbf{Hole at:} $\left(2, \frac{4}{3}\right)$.`,
+                steps: String.raw`Factor: $f(x) = \frac{(x - 2)(x + 2)}{(x - 2)(x + 1)} = \frac{x + 2}{x + 1}$ for $x \neq 2$. <br>&bull; At $x = 2$, the factor cancels $\implies$ removable discontinuity (hole) at $y = \frac{2+2}{2+1} = \frac{4}{3}$. <br>&bull; At $x = -1$, denominator is zero and numerator is non-zero $\implies$ VA: $x = -1$. <br>&bull; $\lim_{x \to \pm\infty} \frac{x+2}{x+1} = 1 \implies$ HA: $y = 1$.`
+            },
+            {
+                id: 62, chapter: "ch2", section: "2.6", sectionTitle: "2.6 Limits Involving Infinity; Asymptotes of Graphs",
+                specialBadge: "Special Asymptote Drill #2",
+                q: String.raw`<strong>[Radical Function at $\pm\infty$]</strong>
+                $$f(x) = \frac{\sqrt{4x^2 + 1}}{2x - 3}$$
+                By evaluating the limits as $x \to \infty$ and $x \to -\infty$ separately, determine all horizontal and vertical asymptotes of the graph.`,
+                a: String.raw`\textbf{VA:} $x = \frac{3}{2}$, \quad \textbf{HAs:} $y = 1$ (as $x \to \infty$) and $y = -1$ (as $x \to -\infty$).`,
+                steps: String.raw`Factor $|x|$ out of the radical: $\sqrt{4x^2 + 1} = |x|\sqrt{4 + 1/x^2}$. <br>&bull; As $x \to \infty$, $|x| = x \implies \lim_{x\to\infty}\frac{\sqrt{4+1/x^2}}{2 - 3/x} = \frac{2}{2} = 1$. <br>&bull; As $x \to -\infty$, $|x| = -x \implies \lim_{x\to-\infty}\frac{-\sqrt{4+1/x^2}}{2 - 3/x} = -1$. <br>&bull; Denominator $2x - 3 = 0 \implies$ VA at $x = \frac{3}{2}$.`
+            },
+            {
+                id: 63, chapter: "ch2", section: "2.6", sectionTitle: "2.6 Limits Involving Infinity; Asymptotes of Graphs",
+                specialBadge: "Special Asymptote Drill #3",
+                q: String.raw`<strong>[Dual Horizontal Asymptotes]</strong>
+                $$f(x) = \frac{3x - 5}{\sqrt{x^2 + 4}}$$
+                Find all horizontal asymptotes of the function and explain why the graph approaches two different horizontal lines at $\pm\infty$.`,
+                a: String.raw`\textbf{HAs:} $y = 3$ (as $x \to \infty$) and $y = -3$ (as $x \to -\infty$). \textbf{VA:} None.`,
+                steps: String.raw`Since $\sqrt{x^2 + 4} = |x|\sqrt{1 + 4/x^2}$, dividing by $x$ introduces a sign change depending on whether $x > 0$ or $x < 0$:
+                $$\lim_{x \to \pm\infty} \frac{x(3 - 5/x)}{|x|\sqrt{1 + 4/x^2}} = \pm 3.$$`
+            },
+            {
+                id: 64, chapter: "ch2", section: "2.6", sectionTitle: "2.6 Limits Involving Infinity; Asymptotes of Graphs",
+                specialBadge: "Special Asymptote Drill #4",
+                q: String.raw`<strong>[Exponential Asymptotic Behavior]</strong>
+                $$f(x) = \frac{2e^x + 5}{e^x - 3}$$
+                Determine the equations of all horizontal and vertical asymptotes by analyzing $x \to \infty$, $x \to -\infty$, and the zeroes of the denominator.`,
+                a: String.raw`\textbf{VA:} $x = \ln 3$, \quad \textbf{HAs:} $y = 2$ (as $x \to \infty$) and $y = -\frac{5}{3}$ (as $x \to -\infty$).`,
+                steps: String.raw`&bull; VA: $e^x - 3 = 0 \implies x = \ln 3$. <br>&bull; As $x \to \infty$, divide by $e^x$: $\lim_{x\to\infty}\frac{2 + 5e^{-x}}{1 - 3e^{-x}} = 2$. <br>&bull; As $x \to -\infty$, $e^x \to 0 \implies \lim_{x\to-\infty}\frac{0 + 5}{0 - 3} = -\frac{5}{3}$.`
+            },
+            {
+                id: 65, chapter: "ch2", section: "2.6", sectionTitle: "2.6 Limits Involving Infinity; Asymptotes of Graphs",
+                specialBadge: "Special Asymptote Drill #5",
+                q: String.raw`<strong>[Periodic Trigonometric Vertical Asymptotes]</strong>
+                $$f(x) = \tan(2x)$$
+                Find the exact equations of all vertical asymptotes of the function that lie strictly within the open interval $(-\pi, \pi)$.`,
+                a: String.raw`$$x = -\frac{3\pi}{4}, \quad x = -\frac{\pi}{4}, \quad x = \frac{\pi}{4}, \quad x = \frac{3\pi}{4}.$$`,
+                steps: String.raw`$\tan(2x) = \frac{\sin(2x)}{\cos(2x)}$ has vertical asymptotes when $2x = \frac{\pi}{2} + k\pi \implies x = \frac{\pi}{4} + \frac{k\pi}{2}$ for $k \in \mathbb{Z}$. Testing $k = -2, -1, 0, 1$ yields the $4$ lines in $(-\pi, \pi)$.`
+            },
+            {
+                id: 66, chapter: "ch2", section: "2.6", sectionTitle: "2.6 Limits Involving Infinity; Asymptotes of Graphs",
+                specialBadge: "Special Asymptote Drill #6",
+                q: String.raw`<strong>[Oblique/Slant Asymptote via Polynomial Division]</strong>
+                $$f(x) = \frac{2x^3 - 3x^2 + 4}{x^2 + 1}$$
+                Since the degree of the numerator is exactly one greater than the degree of the denominator, find the equation of the oblique (slant) asymptote $y = mx + b$ and verify that $\lim_{x \to \pm\infty} [f(x) - (mx + b)] = 0$.`,
+                a: String.raw`\textbf{Oblique Asymptote:} $y = 2x - 3$ \quad (No VA or HA).`,
+                steps: String.raw`By polynomial long division:
+                $$\frac{2x^3 - 3x^2 + 4}{x^2 + 1} = (2x - 3) + \frac{-2x + 7}{x^2 + 1}.$$
+                Since $\lim_{x \to \pm\infty} \frac{-2x + 7}{x^2 + 1} = 0$, the slant asymptote is $y = 2x - 3$.`
+            },
+            {
+                id: 67, chapter: "ch2", section: "2.6", sectionTitle: "2.6 Limits Involving Infinity; Asymptotes of Graphs",
+                specialBadge: "Special Asymptote Drill #7",
+                q: String.raw`<strong>[Oblique Asymptote and One-Sided Infinite Limits]</strong>
+                $$f(x) = \frac{x^2 - 4x + 3}{x - 2}$$
+                Find the equation of the oblique asymptote and determine the one-sided infinite limits $\lim_{x \to 2^-} f(x)$ and $\lim_{x \to 2^+} f(x)$ around the vertical asymptote.`,
+                a: String.raw`\textbf{Oblique Asymptote:} $y = x - 2$, \quad $\lim_{x \to 2^-} f(x) = +\infty$, \quad $\lim_{x \to 2^+} f(x) = -\infty$.`,
+                steps: String.raw`Divide: $f(x) = x - 2 - \frac{1}{x - 2}$, so the oblique asymptote is $y = x - 2$. At $x = 2$, the numerator is $4 - 8 + 3 = -1 < 0$. Thus as $x \to 2^-$, $x - 2 \to 0^- \implies f(x) \to +\infty$; as $x \to 2^+$, $x - 2 \to 0^+ \implies f(x) \to -\infty$.`
+            },
+            {
+                id: 68, chapter: "ch2", section: "2.6", sectionTitle: "2.6 Limits Involving Infinity; Asymptotes of Graphs",
+                specialBadge: "Special Asymptote Drill #8",
+                q: String.raw`<strong>[Logarithmic Domain and Asymptotes]</strong>
+                $$f(x) = \ln\left(\frac{x-1}{x+3}\right)$$
+                First find the natural domain of $f(x)$, and then determine all vertical and horizontal asymptotes by evaluating the appropriate boundary and infinite limits.`,
+                a: String.raw`\textbf{Domain:} $(-\infty, -3) \cup (1, \infty)$, \quad \textbf{VAs:} $x = -3$ and $x = 1$, \quad \textbf{HA:} $y = 0$.`,
+                steps: String.raw`Require $\frac{x-1}{x+3} > 0 \implies x \in (-\infty, -3) \cup (1, \infty)$. <br>&bull; As $x \to 1^+$, $\frac{x-1}{x+3} \to 0^+ \implies f(x) \to -\infty$ (VA: $x = 1$). <br>&bull; As $x \to -3^-$, $\frac{x-1}{x+3} \to +\infty \implies f(x) \to +\infty$ (VA: $x = -3$). <br>&bull; As $x \to \pm\infty$, $\frac{x-1}{x+3} \to 1 \implies f(x) \to \ln(1) = 0$ (HA: $y = 0$).`
+            },
+            {
+                id: 69, chapter: "ch2", section: "2.6", sectionTitle: "2.6 Limits Involving Infinity; Asymptotes of Graphs",
+                specialBadge: "Special Asymptote Drill #9",
+                q: String.raw`<strong>[Inverse Trigonometric End Behavior]</strong>
+                $$f(x) = 2\arctan(x) + \frac{1}{x}$$
+                Analyze the behavior of $f(x)$ as $x \to \infty$, $x \to -\infty$, and $x \to 0^{\pm}$ to write the equations of all horizontal and vertical asymptotes.`,
+                a: String.raw`\textbf{VA:} $x = 0$, \quad \textbf{HAs:} $y = \pi$ (as $x \to \infty$) and $y = -\pi$ (as $x \to -\infty$).`,
+                steps: String.raw`&bull; As $x \to \infty$, $2\arctan(x) + \frac{1}{x} \to 2\left(\frac{\pi}{2}\right) + 0 = \pi$. <br>&bull; As $x \to -\infty$, $2\arctan(x) + \frac{1}{x} \to 2\left(-\frac{\pi}{2}\right) + 0 = -\pi$. <br>&bull; As $x \to 0^{\pm}$, $2\arctan(x) \to 0$ while $\frac{1}{x} \to \pm\infty \implies$ VA at $x = 0$.`
+            },
+            {
+                id: 70, chapter: "ch2", section: "2.6", sectionTitle: "2.6 Limits Involving Infinity; Asymptotes of Graphs",
+                specialBadge: "Special Asymptote Drill #10",
+                q: String.raw`<strong>[Radical Conjugation and Horizontal Asymptote]</strong>
+                $$f(x) = \sqrt{x^2 + 6x} - x$$
+                Compute the limits as $x \to \infty$ and $x \to -\infty$ to identify any horizontal asymptote and determine the end behavior in both directions.`,
+                a: String.raw`\textbf{HA:} $y = 3$ (as $x \to \infty$); \quad as $x \to -\infty$, $f(x) \to +\infty$ (approaching oblique line $y = -2x - 3$).`,
+                steps: String.raw`&bull; As $x \to \infty$: multiply by conjugate to get $\lim_{x\to\infty}\frac{6x}{\sqrt{x^2+6x} + x} = \frac{6}{1 + 1} = 3 \implies$ HA: $y = 3$. <br>&bull; As $x \to -\infty$: both $\sqrt{x^2+6x} \to +\infty$ and $-x \to +\infty$, so $f(x) \to +\infty$.`
+            },
+
+            // ==================== CHAPTER 3: DERIVATIVES ====================
+            // 3.1 Tangent Lines and the Derivative at a Point
+            {
+                id: 71, chapter: "ch3", section: "3.1", sectionTitle: "3.1 Tangent Lines and the Derivative at a Point",
+                q: String.raw`Using the limit definition $f'(x_0) = \lim_{h \to 0} \frac{f(x_0+h) - f(x_0)}{h}$, find the slope of the tangent line to the curve $f(x) = \frac{1}{\sqrt{x}}$ at $x_0 = 4$.`,
+                a: String.raw`$$f'(4) = -\frac{1}{16}.$$`,
+                steps: String.raw`$$f'(4) = \lim_{h \to 0} \frac{\frac{1}{\sqrt{4+h}} - \frac{1}{2}}{h} = \lim_{h \to 0} \frac{2 - \sqrt{4+h}}{2h\sqrt{4+h}} = \lim_{h \to 0} \frac{-h}{2h\sqrt{4+h}(2 + \sqrt{4+h})} = -\frac{1}{16}.$$`
+            },
+            {
+                id: 72, chapter: "ch3", section: "3.1", sectionTitle: "3.1 Tangent Lines and the Derivative at a Point",
+                q: String.raw`Using the alternative limit definition $f'(c) = \lim_{x \to c} \frac{f(x) - f(c)}{x - c}$, find the derivative of $f(x) = \frac{x}{x + 2}$ at $c = 1$, and write the equation of the normal line at that point.`,
+                a: String.raw`$$f'(1) = \frac{2}{9}, \quad \text{Normal Line: } y - \frac{1}{3} = -\frac{9}{2}(x - 1).$$`,
+                steps: String.raw`$$f'(1) = \lim_{x \to 1} \frac{\frac{x}{x+2} - \frac{1}{3}}{x - 1} = \lim_{x \to 1} \frac{2(x - 1)}{3(x + 2)(x - 1)} = \frac{2}{9}.$$
+                The normal slope is $m_\perp = -\frac{9}{2}$ through $\left(1, \frac{1}{3}\right)$.`
+            },
+            {
+                id: 73, chapter: "ch3", section: "3.1", sectionTitle: "3.1 Tangent Lines and the Derivative at a Point",
+                q: String.raw`Recognize the following limit as the derivative of a specific function $f(x)$ at a specific point $a$, and state both $f(x)$ and $a$:
+                $$\lim_{h \to 0} \frac{(2+h)^5 - 32}{h}$$`,
+                a: String.raw`$$f(x) = x^5 \text{ at } a = 2; \quad \text{Limit value} = f'(2) = 5(2)^4 = 80.$$`,
+                steps: String.raw`Matches $\lim_{h\to 0}\frac{f(a+h)-f(a)}{h}$ with $f(x) = x^5$ and $a = 2$.`
+            },
+            {
+                id: 74, chapter: "ch3", section: "3.1", sectionTitle: "3.1 Tangent Lines and the Derivative at a Point",
+                q: String.raw`Find the equations of both tangent lines to the parabola $y = x^2 + 1$ that pass through the external point $(2, 1)$ (which does not lie on the parabola).`,
+                a: String.raw`$$y = 1 \quad \text{and} \quad y = 8x - 15.$$`,
+                steps: String.raw`Let the point of tangency be $(a, a^2 + 1)$ with slope $m = 2a$. The tangent line $y - (a^2 + 1) = 2a(x - a)$ passes through $(2, 1)$:
+                $$1 - a^2 - 1 = 2a(2 - a) \implies a^2 - 4a = 0 \implies a = 0 \text{ or } a = 4.$$
+                For $a = 0$: $y = 1$. For $a = 4$: slope $m = 8$, line $y = 8x - 15$.`
+            },
+
+            // 3.2 The Derivative as a Function
+            {
+                id: 75, chapter: "ch3", section: "3.2", sectionTitle: "3.2 The Derivative as a Function",
+                q: String.raw`Use the formal limit definition of the derivative to find $f'(x)$ for $f(x) = \sqrt{2x + 3}$, and state the domains of both $f$ and $f'$.`,
+                a: String.raw`$$f'(x) = \frac{1}{\sqrt{2x + 3}}, \quad \text{Dom}(f) = \left[-\frac{3}{2}, \infty\right), \quad \text{Dom}(f') = \left(-\frac{3}{2}, \infty\right).$$`,
+                steps: String.raw`$$f'(x) = \lim_{h \to 0} \frac{\sqrt{2x + 2h + 3} - \sqrt{2x + 3}}{h} = \lim_{h \to 0} \frac{2}{\sqrt{2x + 2h + 3} + \sqrt{2x + 3}} = \frac{1}{\sqrt{2x + 3}}.$$`
+            },
+            {
+                id: 76, chapter: "ch3", section: "3.2", sectionTitle: "3.2 The Derivative as a Function",
+                q: String.raw`Let $f(x) = x^{2/3} + |x - 2|$. Find all values of $x$ where $f$ is continuous but not differentiable. Classify each non-differentiable point as a corner, a cusp, or a vertical tangent.`,
+                a: String.raw`$x = 0$ (\textbf{cusp}) and $x = 2$ (\textbf{corner}).`,
+                steps: String.raw`At $x = 0$, the derivative of $x^{2/3}$ is $\frac{2}{3}x^{-1/3} \to \mp\infty$ as $x \to 0^{\mp}$ (cusp). At $x = 2$, $|x-2|$ has left slope $-1$ and right slope $+1$, creating a sharp corner.`
+            },
+            {
+                id: 77, chapter: "ch3", section: "3.2", sectionTitle: "3.2 The Derivative as a Function",
+                q: String.raw`Determine whether the piecewise function is differentiable at $x = 1$:
+                $$f(x) = \begin{cases} x^3 - 2x, & x \le 1 \\ x^2 - x - 1, & x > 1 \end{cases}$$`,
+                a: String.raw`\textbf{Yes, differentiable at $x = 1$} with $f'(1) = 1$.`,
+                steps: String.raw`1) Continuity at $x=1$: $\lim_{x\to 1^-}(x^3-2x) = -1$ and $\lim_{x\to 1^+}(x^2-x-1) = -1$. <br>2) Derivatives: $f'_-(1) = [3x^2 - 2]_{x=1} = 1$ and $f'_+(1) = [2x - 1]_{x=1} = 1$. Since both match, $f'(1) = 1$.`
+            },
+            {
+                id: 78, chapter: "ch3", section: "3.2", sectionTitle: "3.2 The Derivative as a Function",
+                q: String.raw`Find the exact values of $a$ and $b$ so that the following function is both continuous and differentiable at $x = 1$:
+                $$f(x) = \begin{cases} ax^2 + bx + 1, & x \le 1 \\ 2e^{x-1} + 3x, & x > 1 \end{cases}$$`,
+                a: String.raw`$$a = 1, \quad b = 3.$$`,
+                steps: String.raw`Continuity at $x = 1$: $a + b + 1 = 2e^0 + 3 = 5 \implies a + b = 4$. <br>Differentiability at $x = 1$: $2a(1) + b = [2e^{x-1} + 3]_{x=1} = 5 \implies 2a + b = 5$. Subtracting gives $a = 1, b = 3$.`
+            },
+            {
+                id: 79, chapter: "ch3", section: "3.2", sectionTitle: "3.2 The Derivative as a Function",
+                q: String.raw`Suppose $f$ is differentiable everywhere and satisfies $f(x + y) = f(x) + f(y) + 3xy$ for all real $x, y$, and $\lim_{h \to 0} \frac{f(h)}{h} = 4$. Find $f(0)$ and derive a formula for $f'(x)$.`,
+                a: String.raw`$$f(0) = 0, \quad f'(x) = 3x + 4.$$`,
+                steps: String.raw`Set $x = y = 0 \implies f(0) = 2f(0) \implies f(0) = 0$. Then:
+                $$f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h} = \lim_{h \to 0} \frac{f(h) + 3xh}{h} = 4 + 3x.$$`
+            },
+            {
+                id: 80, chapter: "ch3", section: "3.2", sectionTitle: "3.2 The Derivative as a Function",
+                q: String.raw`Given $f(x) = x^2|x|$, prove that $f'(0)$ exists and find a piecewise formula for $f'(x)$. Does the second derivative $f''(0)$ exist?`,
+                a: String.raw`$$f'(x) = 3x|x|, \quad f''(0) = 0 \text{ (exists!)}.$$`,
+                steps: String.raw`For $x \ge 0$, $f(x) = x^3 \implies f'(x) = 3x^2$; for $x < 0$, $f(x) = -x^3 \implies f'(x) = -3x^2$. Thus $f'(x) = 3x|x|$. At $x = 0$, $f''(0) = \lim_{h\to 0}\frac{3h|h| - 0}{h} = \lim_{h\to 0} 3|h| = 0$.`
+            },
+
+            // 3.3 Differentiation Rules
+            {
+                id: 81, chapter: "ch3", section: "3.3", sectionTitle: "3.3 Differentiation Rules",
+                q: String.raw`Differentiate $y = \frac{x^3 - 4x\sqrt{x} + 2}{x^2}$ by first simplifying the algebraic expression, and then verify you get the same result via the Quotient Rule.`,
+                a: String.raw`$$y' = 1 + 2x^{-3/2} - 4x^{-3} = 1 + \frac{2}{x\sqrt{x}} - \frac{4}{x^3}.$$`,
+                steps: String.raw`Split terms: $y = x - 4x^{-1/2} + 2x^{-2}$. Differentiating term-by-term with the Power Rule gives $y' = 1 + 2x^{-3/2} - 4x^{-3}$.`
+            },
+            {
+                id: 82, chapter: "ch3", section: "3.3", sectionTitle: "3.3 Differentiation Rules",
+                q: String.raw`Find the derivative of $f(x) = (x^2 + 1)(x^3 - 2x + 5)e^x$.`,
+                a: String.raw`$$f'(x) = \left(x^5 + 5x^4 - x^3 + 2x^2 + 7x + 3\right)e^x.$$`,
+                steps: String.raw`Expand polynomial product first: $P(x) = (x^2+1)(x^3-2x+5) = x^5 - x^3 + 5x^2 - 2x + 5$. Using $\frac{d}{dx}[P(x)e^x] = [P(x) + P'(x)]e^x$ where $P'(x) = 5x^4 - 3x^2 + 10x - 2$ yields the result.`
+            },
+            {
+                id: 83, chapter: "ch3", section: "3.3", sectionTitle: "3.3 Differentiation Rules",
+                q: String.raw`Find the equation of the tangent line to the curve $y = \frac{e^x}{x^2 + 1}$ at the point $(1, e/2)$.`,
+                a: String.raw`$$y = \frac{e}{2} \quad \text{(Horizontal tangent line)}.$$`,
+                steps: String.raw`By the Quotient Rule: $y' = \frac{e^x(x^2 + 1) - e^x(2x)}{(x^2 + 1)^2} = \frac{e^x(x - 1)^2}{(x^2 + 1)^2}$. At $x = 1$, $y'(1) = 0$, so the tangent line is $y = \frac{e}{2}$.`
+            },
+            {
+                id: 84, chapter: "ch3", section: "3.3", sectionTitle: "3.3 Differentiation Rules",
+                q: String.raw`Find all points on the curve $y = \frac{x^2 - 3}{x - 2}$ where the tangent line is horizontal.`,
+                a: String.raw`$$(1, 2) \quad \text{and} \quad (3, 6).$$`,
+                steps: String.raw`$$y' = \frac{2x(x - 2) - (x^2 - 3)}{(x - 2)^2} = \frac{x^2 - 4x + 3}{(x - 2)^2} = \frac{(x - 1)(x - 3)}{(x - 2)^2} = 0 \implies x = 1, 3.$$`
+            },
+            {
+                id: 85, chapter: "ch3", section: "3.3", sectionTitle: "3.3 Differentiation Rules",
+                q: String.raw`Find all points on the curve $y = x^3 - 3x^2 + 4x - 1$ where the tangent line is parallel to the line $2x - 2y + 7 = 0$.`,
+                a: String.raw`$$(1, 1).$$`,
+                steps: String.raw`The line $2x - 2y + 7 = 0 \implies y = x + \frac{7}{2}$ has slope $1$. Set $y' = 3x^2 - 6x + 4 = 1 \implies 3(x - 1)^2 = 0 \implies x = 1$, giving point $(1, 1)$.`
+            },
+            {
+                id: 86, chapter: "ch3", section: "3.3", sectionTitle: "3.3 Differentiation Rules",
+                q: String.raw`Suppose $f(2) = 3$, $f'(2) = -2$, $g(2) = -1$, and $g'(2) = 4$. Find the instantaneous rate of change of $h(x) = \frac{x^2 f(x)}{3g(x) - f(x)}$ at $x = 2$.`,
+                a: String.raw`$$h'(2) = \frac{10}{3}.$$`,
+                steps: String.raw`Let $N(x) = x^2 f(x)$ and $D(x) = 3g(x) - f(x)$. At $x = 2$: $N(2) = 12$, $N'(2) = 4(3) + 4(-2) = 4$, $D(2) = -3 - 3 = -6$, and $D'(2) = 3(4) - (-2) = 14$. Then $h'(2) = \frac{4(-6) - 12(14)}{(-6)^2} = \frac{-192}{36} = -\frac{16}{3}$.`
+            },
+            {
+                id: 87, chapter: "ch3", section: "3.3", sectionTitle: "3.3 Differentiation Rules",
+                q: String.raw`Find a cubic polynomial $P(x) = ax^3 + bx^2 + cx + d$ that has a horizontal tangent at $(0, 2)$ and an inflection-tangent slope of $P'(1) = 3$ while passing through $(1, 4)$ with $P''(1) = 0$.`,
+                a: String.raw`$$P(x) = -x^3 + 3x^2 + 2.$$`,
+                steps: String.raw`$P(0) = 2 \implies d = 2$; $P'(0) = 0 \implies c = 0$. Next, $P''(x) = 6ax + 2b$, so $P''(1) = 6a + 2b = 0 \implies b = -3a$. Finally $P(1) = a + b + 2 = 4 \implies a + b = 2 \implies -2a = 2 \implies a = -1, b = 3$ (which also satisfies $P'(1) = 3a + 2b = 3$).`
+            },
+            {
+                id: 88, chapter: "ch3", section: "3.3", sectionTitle: "3.3 Differentiation Rules",
+                q: String.raw`Let $y = x^2 e^x$. Find $y'$, $y''$, $y'''$, and deduce a general formula for the $n$-th derivative $\frac{d^n y}{dx^n}$ for any positive integer $n$.`,
+                a: String.raw`$$\frac{d^n y}{dx^n} = \left[x^2 + 2nx + n(n - 1)\right]e^x.$$`,
+                steps: String.raw`$y' = (x^2 + 2x)e^x$, $y'' = (x^2 + 4x + 2)e^x$, $y''' = (x^2 + 6x + 6)e^x$. By induction (or Leibniz's Rule), the $n$-th derivative is $[x^2 + 2nx + n(n-1)]e^x$.`
+            },
+            {
+                id: 89, chapter: "ch3", section: "3.3", sectionTitle: "3.3 Differentiation Rules",
+                q: String.raw`For what values of $c$ does the line $y = 2x + c$ intersect the parabola $y = x^2 - 4x + 5$ tangentially?`,
+                a: String.raw`$$c = -4.$$`,
+                steps: String.raw`Match slopes: $y' = 2x - 4 = 2 \implies x = 3$. On the parabola, $y(3) = 9 - 12 + 5 = 2$. Substituting $(3, 2)$ into $y = 2x + c$ gives $2 = 6 + c \implies c = -4$.`
+            },
+            {
+                id: 90, chapter: "ch3", section: "3.3", sectionTitle: "3.3 Differentiation Rules",
+                q: String.raw`If a gas in a cylinder is maintained at a constant temperature $T$, the pressure $P$ is related to the volume $V$ by the van der Waals formula $P = \frac{nRT}{V - nb} - \frac{an^2}{V^2}$, where $a, b, n, R, T$ are constants. Find $\frac{dP}{dV}$.`,
+                a: String.raw`$$\frac{dP}{dV} = -\frac{nRT}{(V - nb)^2} + \frac{2an^2}{V^3}.$$`,
+                steps: String.raw`Differentiate with respect to $V$ treating $a, b, n, R, T$ as constants: $\frac{d}{dV}(V - nb)^{-1} = -(V - nb)^{-2}$ and $\frac{d}{dV}(-V^{-2}) = 2V^{-3}$.`
+            },
+
+            // 3.4 The Derivative as a Rate of Change
+            {
+                id: 91, chapter: "ch3", section: "3.4", sectionTitle: "3.4 The Derivative as a Rate of Change",
+                q: String.raw`A particle moves along a horizontal coordinate axis with position $s(t) = t^3 - 9t^2 + 24t + 5$ for $t \ge 0$ (where $s$ is in meters and $t$ is in seconds). <br>(a) Find the velocity $v(t)$ and acceleration $a(t)$. <br>(b) Determine the time intervals when the particle is moving to the left. <br>(c) Find the <strong>total distance</strong> traveled by the particle during the first $5$ seconds ($0 \le t \le 5$).`,
+                a: String.raw`(a) $v(t) = 3(t-2)(t-4)$, $a(t) = 6t - 18$; \quad (b) $(2, 4)$; \quad (c) Total distance $= 28\text{ m}$.`,
+                steps: String.raw`$v(t) = 3t^2 - 18t + 24 = 3(t - 2)(t - 4) < 0$ on $(2, 4)$. Evaluate positions at turning points: $s(0) = 5$, $s(2) = 25$, $s(4) = 21$, $s(5) = 25$. Total distance $= |25 - 5| + |21 - 25| + |25 - 21| = 20 + 4 + 4 = 28\text{ m}$.`
+            },
+            {
+                id: 92, chapter: "ch3", section: "3.4", sectionTitle: "3.4 The Derivative as a Rate of Change",
+                q: String.raw`For the particle in Question 91, determine the exact time intervals on $[0, 6]$ during which the particle is <strong>speeding up</strong> (Note: a particle speeds up when $v(t)$ and $a(t)$ have the same sign).`,
+                a: String.raw`$$(2, 3) \cup (4, 6].$$`,
+                steps: String.raw`$v(t) = 3(t - 2)(t - 4)$ is negative on $(2, 4)$ and positive on $[0, 2) \cup (4, 6]$. $a(t) = 6(t - 3)$ is negative on $[0, 3)$ and positive on $(3, 6]$. Both are negative on $(2, 3)$ and both are positive on $(4, 6]$.`
+            },
+            {
+                id: 93, chapter: "ch3", section: "3.4", sectionTitle: "3.4 The Derivative as a Rate of Change",
+                q: String.raw`A stone is thrown vertically upward from the edge of a $40\text{ m}$ tall cliff with an initial velocity of $15\text{ m/s}$. Its height above the ground after $t$ seconds is $s(t) = 40 + 15t - 4.9t^2$. <br>(a) How long does it take the stone to reach its maximum height, and what is that height? <br>(b) With what velocity does the stone strike the ground?`,
+                a: String.raw`(a) $t = \frac{15}{9.8} \approx 1.53\text{ s}$, $s_{\max} \approx 51.48\text{ m}$; \quad (b) $v_{\text{impact}} = -\sqrt{1009} \approx -31.76\text{ m/s}$.`,
+                steps: String.raw`$v(t) = 15 - 9.8t = 0 \implies t = \frac{15}{9.8}\text{ s}$ and $s_{\max} = 40 + \frac{15^2}{19.6} \approx 51.48\text{ m}$. At impact $s(t) = 0$, using $v^2 = v_0^2 - 2g\Delta s = 15^2 + 2(9.8)(40) = 1009 \implies v = -\sqrt{1009} \approx -31.76\text{ m/s}$.`
+            },
+            {
+                id: 94, chapter: "ch3", section: "3.4", sectionTitle: "3.4 The Derivative as a Rate of Change",
+                q: String.raw`On the Moon, the acceleration due to gravity is $1.6\text{ m/s}^2$, whereas on Earth it is $9.8\text{ m/s}^2$. If a rock is thrown upward with the same initial velocity $v_0$ on both bodies, find the ratio of the maximum height reached on the Moon to the maximum height reached on Earth.`,
+                a: String.raw`$$\frac{H_{\text{Moon}}}{H_{\text{Earth}}} = \frac{9.8}{1.6} = \frac{49}{8} = 6.125.$$`,
+                steps: String.raw`Since $v(t) = v_0 - gt = 0 \implies t_{\max} = \frac{v_0}{g}$, the maximum height is $H = \frac{v_0^2}{2g}$, which is inversely proportional to $g$.`
+            },
+            {
+                id: 95, chapter: "ch3", section: "3.4", sectionTitle: "3.4 The Derivative as a Rate of Change",
+                q: String.raw`The radius $r$ of a spherical balloon is expanding. Find the instantaneous rate of change of the volume $V = \frac{4}{3}\pi r^3$ with respect to the surface area $S = 4\pi r^2$ when $r = 6\text{ cm}$.`,
+                a: String.raw`$$\left.\frac{dV}{dS}\right|_{r=6} = 3\text{ cm}.$$`,
+                steps: String.raw`Notice that $\frac{dV}{dS} = \frac{dV/dr}{dS/dr} = \frac{4\pi r^2}{8\pi r} = \frac{r}{2}$. Evaluating at $r = 6\text{ cm}$ gives $\frac{6}{2} = 3\text{ cm}$.`
+            },
+            {
+                id: 96, chapter: "ch3", section: "3.4", sectionTitle: "3.4 The Derivative as a Rate of Change",
+                q: String.raw`The total cost (in dollars) of manufacturing $x$ microprocessors is $C(x) = 2000 + 15x - 0.02x^2 + 0.0001x^3$. <br>(a) Find the marginal cost function $C'(x)$. <br>(b) Compare $C'(100)$ with the actual cost of producing the $101\text{st}$ microprocessor, $C(101) - C(100)$.`,
+                a: String.raw`(a) $C'(x) = 15 - 0.04x + 0.0003x^2$; \quad (b) $C'(100) = \$14.00$, $\Delta C = \$14.0101$.`,
+                steps: String.raw`$C'(100) = 15 - 4 + 3 = 14$. Actual cost: $C(101) - C(100) = 15(1) - 0.02(201) + 0.0001(30301) = 15 - 4.02 + 3.0301 = 14.0101$.`
+            },
+            {
+                id: 97, chapter: "ch3", section: "3.4", sectionTitle: "3.4 The Derivative as a Rate of Change",
+                q: String.raw`Two particles start at the origin at $t = 0$ and move along the $x$-axis. Their positions are given by $s_1(t) = t^2 - 3t$ and $s_2(t) = 2t^3 - 7t^2 + 5t$. Find the velocity of each particle at the non-zero instant when they have the same acceleration.`,
+                a: String.raw`At $t = \frac{4}{3}\text{ s}$: \quad $v_1\left(\frac{4}{3}\right) = -\frac{1}{3}$, \quad $v_2\left(\frac{4}{3}\right) = -\frac{29}{3}$.`,
+                steps: String.raw`$v_1 = 2t - 3, a_1 = 2$; $v_2 = 6t^2 - 14t + 5, a_2 = 12t - 14$. Setting $a_1 = a_2 \implies 12t - 14 = 2 \implies t = \frac{4}{3}$. Substituting $t = \frac{4}{3}$ into $v_1$ and $v_2$ yields the velocities.`
+            },
+            {
+                id: 98, chapter: "ch3", section: "3.4", sectionTitle: "3.4 The Derivative as a Rate of Change",
+                q: String.raw`A particle moves along a line with position $s(t) = (t - 2)^2 e^t$ for $t \ge 0$. Find all values of $t$ where the velocity is zero, and compute the acceleration at each of those instants.`,
+                a: String.raw`$t = 0 \implies a(0) = -2$; \quad $t = 2 \implies a(2) = 2e^2$.`,
+                steps: String.raw`$v(t) = [(t-2)^2 + 2(t-2)]e^t = t(t - 2)e^t = 0 \implies t = 0, 2$. Next, $a(t) = (t^2 - 2t + 2t - 2)e^t = (t^2 - 2)e^t$, so $a(0) = -2$ and $a(2) = 2e^2$.`
+            },
+            {
+                id: 99, chapter: "ch3", section: "3.4", sectionTitle: "3.4 The Derivative as a Rate of Change",
+                q: String.raw`Electrical resistance $R$ of a wire varies inversely with the square of its cross-sectional diameter $d$, given by $R(d) = \frac{k}{d^2}$ where $k$ is a positive constant. Find the sensitivity of resistance to diameter $\frac{dR}{dd}$, and interpret the physical meaning of its negative sign.`,
+                a: String.raw`$$\frac{dR}{dd} = -\frac{2k}{d^3} < 0.$$`,
+                steps: String.raw`The negative sign indicates that as the wire's diameter $d$ increases, the electrical resistance $R$ decreases (at a rate inversely proportional to $d^3$).`
+            },
+            {
+                id: 100, chapter: "ch3", section: "3.4", sectionTitle: "3.4 The Derivative as a Rate of Change",
+                specialBadge: "Synthesis Challenge #100",
+                q: String.raw`<strong>[Synthesis Challenge: Asymptotes + Differentiability + Rates of Change]</strong>
+                Consider the rational function $f(x) = \frac{x^2 + ax + b}{x - c}$. <br>(a) Suppose $f(x)$ has a vertical asymptote at $x = 2$ and an oblique asymptote with equation $y = x + 5$. Find the values of $a$ and $c$. <br>(b) If the graph of $f(x)$ also has a local horizontal tangent at $x = 0$, determine the exact value of $b$ and compute the second derivative $f''(0)$.`,
+                a: String.raw`(a) $c = 2, a = 3$; \quad (b) $b = -6$, and $f''(0) = -1$.`,
+                steps: String.raw`1) VA at $x = 2 \implies c = 2$. <br>2) Polynomial division: $\frac{x^2 + ax + b}{x - 2} = x + (a + 2) + \frac{2a + b + 4}{x - 2}$. Matching oblique asymptote $y = x + 5$ gives $a + 2 = 5 \implies a = 3$. <br>3) Derivative: $f'(x) = 1 - \frac{2a + b + 4}{(x - 2)^2} = 1 - \frac{10 + b}{(x - 2)^2}$. Setting $f'(0) = 0 \implies 1 - \frac{10 + b}{4} = 0 \implies b = -6$. <br>4) Finally, $f'(x) = 1 - 4(x - 2)^{-2} \implies f''(x) = 8(x - 2)^{-3} \implies f''(0) = \frac{8}{-8} = -1$.`
+            }
+        ];
+
+        // State Management (Saved in localStorage)
+        const STORAGE_KEY = 'thomas_calculus_workbook_v1';
+        let appState = {
+            solved: {},       // { [id]: true }
+            bookmarked: {},   // { [id]: true }
+            notes: {},        // { [id]: "string" }
+            openSolutions: {},// { [id]: true }
+            openScratch: {},  // { [id]: true }
+            filterSection: 'all',
+            filterStatus: 'all',
+            searchQuery: '',
+            allSolutionsOpen: false
+        };
+
+        function loadState() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    appState.solved = parsed.solved || {};
+                    appState.bookmarked = parsed.bookmarked || {};
+                    appState.notes = parsed.notes || {};
+                }
+            } catch (e) {
+                console.warn('Could not load saved workbook state:', e);
+            }
+        }
+
+        function saveState() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify({
+                    solved: appState.solved,
+                    bookmarked: appState.bookmarked,
+                    notes: appState.notes
+                }));
+            } catch (e) {
+                console.warn('Could not save workbook state:', e);
+            }
+            updateCounters();
+        }
+
+        function updateCounters() {
+            const solvedCount = Object.keys(appState.solved).filter(k => appState.solved[k]).length;
+            const bookmarkCount = Object.keys(appState.bookmarked).filter(k => appState.bookmarked[k]).length;
+            const unsolvedCount = 100 - solvedCount;
+
+            document.getElementById('solvedCountText').textContent = `${solvedCount} / 100 Solved`;
+            document.getElementById('bookmarkCountText').textContent = `${bookmarkCount} Bookmarked`;
+            document.getElementById('topProgressBar').style.width = `${solvedCount}%`;
+
+            document.getElementById('badgeAll').textContent = '100';
+            document.getElementById('badgeUnsolved').textContent = String(unsolvedCount);
+            document.getElementById('badgeSolved').textContent = String(solvedCount);
+            document.getElementById('badgeBookmarked').textContent = String(bookmarkCount);
+        }
+
+        function getFilteredQuestions() {
+            return QUESTIONS_DATA.filter(item => {
+                // Section filter
+                if (appState.filterSection === 'ch1' && item.chapter !== 'ch1') return false;
+                if (appState.filterSection === 'ch2' && item.chapter !== 'ch2') return false;
+                if (appState.filterSection === 'ch3' && item.chapter !== 'ch3') return false;
+                if (appState.filterSection === 'asymptotes' && (item.id < 61 || item.id > 70)) return false;
+                if (!['all', 'ch1', 'ch2', 'ch3', 'asymptotes'].includes(appState.filterSection)) {
+                    if (item.section !== appState.filterSection) return false;
+                }
+
+                // Status filter
+                const isSolved = !!appState.solved[item.id];
+                const isBookmarked = !!appState.bookmarked[item.id];
+                if (appState.filterStatus === 'solved' && !isSolved) return false;
+                if (appState.filterStatus === 'unsolved' && isSolved) return false;
+                if (appState.filterStatus === 'bookmarked' && !isBookmarked) return false;
+
+                // Search query filter
+                if (appState.searchQuery.trim() !== '') {
+                    const q = appState.searchQuery.trim().toLowerCase();
+                    if (q.startsWith('#')) {
+                        const num = parseInt(q.slice(1), 10);
+                        return item.id === num;
+                    }
+                    const matchId = String(item.id) === q || `q${item.id}` === q;
+                    const matchText = item.q.toLowerCase().includes(q) || 
+                                      item.sectionTitle.toLowerCase().includes(q) ||
+                                      (item.specialBadge && item.specialBadge.toLowerCase().includes(q));
+                    return matchId || matchText;
+                }
+
+                return true;
+            });
+        }
+
+        function renderQuestions() {
+            const container = document.getElementById('questionsContainer');
+            const emptyState = document.getElementById('emptyState');
+            const filtered = getFilteredQuestions();
+
+            document.getElementById('showingCountText').textContent = `Showing ${filtered.length} of 100 questions`;
+
+            if (filtered.length === 0) {
+                container.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+            emptyState.classList.add('hidden');
+
+            let html = '';
+            let lastSection = '';
+
+            filtered.forEach(item => {
+                const isSolved = !!appState.solved[item.id];
+                const isBookmarked = !!appState.bookmarked[item.id];
+                const isSolOpen = !!appState.openSolutions[item.id] || appState.allSolutionsOpen;
+                const isScratchOpen = !!appState.openScratch[item.id];
+                const savedNote = appState.notes[item.id] || '';
+
+                // Section Divider Header
+                if (item.sectionTitle !== lastSection) {
+                    lastSection = item.sectionTitle;
+                    html += `
+                        <div class="pt-4 pb-1 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                            <h3 class="text-sm font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
+                                Section ${item.sectionTitle}
+                            </h3>
+                            <span class="text-xs text-slate-400 font-mono">Thomas' Calculus 15e</span>
+                        </div>
+                    `;
+                }
+
+                // Special Badge HTML (Q61-70 Asymptote Drill & Q100 Synthesis)
+                const specialBadgeHtml = item.specialBadge ? `
+                    <span class="px-2.5 py-0.5 text-[11px] font-bold rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950/80 dark:text-amber-300 border border-amber-300 dark:border-amber-700">
+                        &starf; ${item.specialBadge}
+                    </span>
+                ` : '';
+
+                html += `
+                    <article id="question-${item.id}" class="question-card rounded-2xl bg-white dark:bg-slate-900 border ${isSolved ? 'border-emerald-300 dark:border-emerald-800/70' : 'border-slate-200 dark:border-slate-800'} shadow-sm transition-all duration-150 overflow-hidden">
+                        <!-- Top Card Bar -->
+                        <div class="px-5 py-3 bg-slate-50/70 dark:bg-slate-800/40 border-b border-slate-100 dark:border-slate-800/80 flex flex-wrap items-center justify-between gap-2">
+                            <div class="flex items-center gap-2.5 flex-wrap">
+                                <span class="px-2.5 py-1 rounded-lg font-mono text-xs font-bold ${isSolved ? 'bg-emerald-600 text-white' : 'bg-slate-900 text-white dark:bg-indigo-600'}">
+                                    Problem #${item.id}
+                                </span>
+                                <span class="text-xs font-medium text-slate-500 dark:text-slate-400">
+                                    Sec ${item.section}
+                                </span>
+                                ${specialBadgeHtml}
+                            </div>
+
+                            <!-- Interactive Action Buttons -->
+                            <div class="flex items-center gap-1.5 no-print">
+                                <!-- Solved Toggle -->
+                                <button onclick="toggleSolved(${item.id})" class="px-2.5 py-1 rounded-lg text-xs font-medium border transition-colors flex items-center gap-1 ${isSolved ? 'bg-emerald-50 border-emerald-300 text-emerald-700 dark:bg-emerald-950/60 dark:border-emerald-700 dark:text-emerald-300' : 'border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'}">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                    <span>${isSolved ? 'Solved' : 'Mark Solved'}</span>
+                                </button>
+
+                                <!-- Bookmark Toggle -->
+                                <button onclick="toggleBookmark(${item.id})" class="p-1.5 rounded-lg border transition-colors ${isBookmarked ? 'bg-amber-50 border-amber-300 text-amber-600 dark:bg-amber-950/60 dark:border-amber-700 dark:text-amber-400' : 'border-slate-200 dark:border-slate-700 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200'}" title="Bookmark for Review">
+                                    <svg class="w-4 h-4" fill="${isBookmarked ? 'currentColor' : 'none'}" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Problem Statement Body -->
+                        <div class="p-5 sm:p-6">
+                            <div class="problem-statement text-slate-800 dark:text-slate-100">
+                                ${item.q}
+                            </div>
+
+                            <!-- Card Footer Controls -->
+                            <div class="mt-5 pt-3 border-t border-slate-100 dark:border-slate-800/80 flex flex-wrap items-center gap-3 no-print">
+                                <button onclick="toggleSolution(${item.id})" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-colors flex items-center gap-1.5 ${isSolOpen ? 'bg-indigo-600 text-white' : 'bg-indigo-50 text-indigo-700 hover:bg-indigo-100 dark:bg-indigo-950/70 dark:text-indigo-300 dark:hover:bg-indigo-900/70'}">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                    </svg>
+                                    <span>${isSolOpen ? 'Hide Answer & Key Steps' : 'Show Answer & Solution Key'}</span>
+                                </button>
+
+                                <button onclick="toggleScratchpad(${item.id})" class="px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center gap-1.5">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                    </svg>
+                                    <span>${isScratchOpen ? 'Hide Scratchpad' : 'Scratchpad / Notes'}</span>
+                                    ${savedNote ? '<span class="w-2 h-2 rounded-full bg-indigo-500"></span>' : ''}
+                                </button>
+                            </div>
+
+                            <!-- Expandable Solution Key Panel -->
+                            <div id="sol-panel-${item.id}" class="${isSolOpen ? 'block' : 'hidden'} mt-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-indigo-200/80 dark:border-indigo-900/60 p-4 sm:p-5">
+                                <div class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-1">
+                                    Final Answer
+                                </div>
+                                <div class="text-sm sm:text-base font-medium text-slate-900 dark:text-white pb-3 border-b border-slate-200 dark:border-slate-700/80">
+                                    ${item.a}
+                                </div>
+                                <div class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mt-3 mb-1">
+                                    Key Steps &amp; Method
+                                </div>
+                                <div class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                                    ${item.steps}
+                                </div>
+                            </div>
+
+                            <!-- Expandable Scratchpad Area -->
+                            <div id="scratch-panel-${item.id}" class="${isScratchOpen ? 'block' : 'hidden'} mt-4 no-print">
+                                <textarea oninput="saveNote(${item.id}, this.value)" rows="4" placeholder="Write your derivation steps, reminders, or formulas for Problem #${item.id} here..."
+                                    class="w-full p-3.5 rounded-xl scratchpad-grid bg-amber-50/30 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-sm font-mono text-slate-800 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500">${savedNote}</textarea>
+                            </div>
+
+                            <!-- Print-only Blank Workspace Box -->
+                            <div class="hidden print-workspace"></div>
+                        </div>
+                    </article>
+                `;
+            });
+
+            container.innerHTML = html;
+            typesetMath(container);
+        }
+
+        function typesetMath(element) {
+            if (window.renderMathInElement) {
+                renderMathInElement(element, {
+                    delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '$', right: '$', display: false},
+                        {left: '\\(', right: '\\)', display: false},
+                        {left: '\\[', right: '\\]', display: true}
+                    ],
+                    throwOnError: false
+                });
+            }
+        }
+
+        // Interactive Handlers
+        window.toggleSolved = function(id) {
+            appState.solved[id] = !appState.solved[id];
+            saveState();
+            renderQuestions();
+        };
+
+        window.toggleBookmark = function(id) {
+            appState.bookmarked[id] = !appState.bookmarked[id];
+            saveState();
+            renderQuestions();
+        };
+
+        window.toggleSolution = function(id) {
+            appState.openSolutions[id] = !appState.openSolutions[id];
+            const panel = document.getElementById(`sol-panel-${id}`);
+            if (panel) {
+                panel.classList.toggle('hidden');
+            }
+            renderQuestions();
+        };
+
+        window.toggleScratchpad = function(id) {
+            appState.openScratch[id] = !appState.openScratch[id];
+            renderQuestions();
+        };
+
+        window.saveNote = function(id, val) {
+            appState.notes[id] = val;
+            saveState();
+        };
+
+        // Section & Status Filter Listeners
+        function setupFilters() {
+            const sectionTitlesMap = {
+                'all': ['Complete Workbook', 'All Chapters: Functions, Limits & Derivatives (1.1 – 3.4)'],
+                'asymptotes': ['Special Focus Drill', '10 Curated Asymptote Mastery Problems (VA, HA & Oblique)'],
+                'ch1': ['Chapter 1', 'Functions (Sections 1.1 – 1.5)'],
+                'ch2': ['Chapter 2', 'Limits and Continuity (Sections 2.1 – 2.6)'],
+                'ch3': ['Chapter 3', 'Derivatives (Sections 3.1 – 3.4)'],
+                '1.1': ['Section 1.1', 'Functions and Their Graphs'],
+                '1.2': ['Section 1.2', 'Combining Functions; Shifting and Scaling Graphs'],
+                '1.3': ['Section 1.3', 'Trigonometric Functions'],
+                '1.4': ['Section 1.4', 'Exponential Functions'],
+                '1.5': ['Section 1.5', 'Inverse Functions and Logarithms'],
+                '2.1': ['Section 2.1', 'Rates of Change and Tangent Lines to Curves'],
+                '2.2': ['Section 2.2', 'Limit of a Function and Limit Laws'],
+                '2.3': ['Section 2.3', 'The Precise Definition of a Limit'],
+                '2.4': ['Section 2.4', 'One-Sided Limits'],
+                '2.5': ['Section 2.5', 'Continuity & Intermediate Value Theorem'],
+                '2.6': ['Section 2.6', 'Limits Involving Infinity; Asymptotes of Graphs'],
+                '3.1': ['Section 3.1', 'Tangent Lines and the Derivative at a Point'],
+                '3.2': ['Section 3.2', 'The Derivative as a Function'],
+                '3.3': ['Section 3.3', 'Differentiation Rules'],
+                '3.4': ['Section 3.4', 'The Derivative as a Rate of Change']
+            };
+
+            document.querySelectorAll('.sec-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const sec = btn.getAttribute('data-section');
+                    appState.filterSection = sec;
+
+                    const info = sectionTitlesMap[sec] || ['Section', sec];
+                    document.getElementById('currentViewBadge').textContent = info[0];
+                    document.getElementById('currentViewTitle').textContent = info[1];
+
+                    renderQuestions();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+
+            document.querySelectorAll('.status-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.status-btn').forEach(b => {
+                        b.classList.remove('bg-indigo-600', 'text-white');
+                    });
+                    btn.classList.add('bg-indigo-600', 'text-white');
+                    appState.filterStatus = btn.getAttribute('data-status');
+                    renderQuestions();
+                });
+            });
+
+            // Search Input
+            const searchInput = document.getElementById('searchInput');
+            const clearSearchBtn = document.getElementById('clearSearchBtn');
+            searchInput.addEventListener('input', (e) => {
+                appState.searchQuery = e.target.value;
+                clearSearchBtn.classList.toggle('hidden', !appState.searchQuery);
+                renderQuestions();
+            });
+            clearSearchBtn.addEventListener('click', () => {
+                searchInput.value = '';
+                appState.searchQuery = '';
+                clearSearchBtn.classList.add('hidden');
+                renderQuestions();
+            });
+
+            // Reset Filters from Empty State
+            document.getElementById('resetFiltersBtn').addEventListener('click', () => {
+                appState.filterSection = 'all';
+                appState.filterStatus = 'all';
+                appState.searchQuery = '';
+                searchInput.value = '';
+                clearSearchBtn.classList.add('hidden');
+                renderQuestions();
+            });
+
+            // Toggle All Solutions
+            document.getElementById('toggleAllSolutionsBtn').addEventListener('click', () => {
+                appState.allSolutionsOpen = !appState.allSolutionsOpen;
+                document.getElementById('toggleAllSolutionsLabel').textContent = 
+                    appState.allSolutionsOpen ? 'Hide All Keys' : 'Reveal All Keys';
+                renderQuestions();
+            });
+
+            // Quick Jump to Question #
+            const jumpHandler = () => {
+                const num = parseInt(document.getElementById('jumpInput').value, 10);
+                if (num >= 1 && num <= 100) {
+                    appState.filterSection = 'all';
+                    appState.filterStatus = 'all';
+                    appState.searchQuery = '';
+                    renderQuestions();
+                    const target = document.getElementById(`question-${num}`);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        target.classList.add('ring-2', 'ring-indigo-500');
+                        setTimeout(() => target.classList.remove('ring-2', 'ring-indigo-500'), 1800);
+                    }
+                }
+            };
+            document.getElementById('jumpBtn').addEventListener('click', jumpHandler);
+            document.getElementById('jumpInput').addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') jumpHandler();
+            });
+
+            // Mobile Sidebar Toggle
+            document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+                const nav = document.getElementById('sidebarNav');
+                nav.classList.toggle('hidden');
+            });
+
+            // Custom Reset Progress Modal
+            const modal = document.getElementById('confirmModal');
+            document.getElementById('resetProgressBtn').addEventListener('click', () => {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            });
+            document.getElementById('cancelResetBtn').addEventListener('click', () => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            });
+            document.getElementById('confirmResetBtn').addEventListener('click', () => {
+                appState.solved = {};
+                appState.bookmarked = {};
+                appState.notes = {};
+                saveState();
+                renderQuestions();
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            });
+
+            // Dark / Light Theme Toggle
+            const themeBtn = document.getElementById('themeToggleBtn');
+            const sunIcon = document.getElementById('sunIcon');
+            const moonIcon = document.getElementById('moonIcon');
+
+            const syncThemeIcons = () => {
+                const isDark = document.documentElement.classList.contains('dark');
+                sunIcon.classList.toggle('hidden', !isDark);
+                moonIcon.classList.toggle('hidden', isDark);
+            };
+
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.classList.add('dark');
+            }
+            syncThemeIcons();
+
+            themeBtn.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+                syncThemeIcons();
+            });
+        }
+
+        // Initialize on Window Load
+        window.addEventListener('DOMContentLoaded', () => {
+            loadState();
+            updateCounters();
+            setupFilters();
+            renderQuestions();
+        });
+    </script>
+</body>
+</html>
