@@ -1,15 +1,15 @@
-# Thomas' Calculus (15th Ed.) Mastery Workbook
+# Calculus Mastery Workbook
 
-An interactive, self-contained mastery workbook featuring **100 curated exam-level problems and step-by-step solutions** covering Functions, Limits, Continuity, and Derivatives (Sections 1.1 – 3.4).
+An interactive, self-contained mastery workbook featuring **100 curated exam-level problems and step-by-step solutions** covering Functions, Limits, Continuity, and Derivatives (Sections 1.1 – 3.4), aligned with the standard university Calculus I syllabus.
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-4f46e5?style=for-the-badge&logo=github)](https://enyaliosath.github.io/thomas-calculus-mastery-workbook/)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-4f46e5?style=for-the-badge&logo=github)](https://enyaliosath.github.io/calculus-mastery-workbook/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-10b981?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 ---
 
 ## 🌐 Live Demo
 
-👉 **[View Live Application: https://enyaliosath.github.io/thomas-calculus-mastery-workbook/](https://enyaliosath.github.io/thomas-calculus-mastery-workbook/)**
+👉 **[View Live Application: https://enyaliosath.github.io/calculus-mastery-workbook/](https://enyaliosath.github.io/calculus-mastery-workbook/)**
 
 ---
 
@@ -56,8 +56,14 @@ An interactive, self-contained mastery workbook featuring **100 curated exam-lev
 This project is a zero-dependency, single-page web application (`index.html`):
 
 ```bash
-git clone https://github.com/EnyaliosATH/thomas-calculus-mastery-workbook.git
-cd thomas-calculus-mastery-workbook
+git clone https://github.com/EnyaliosATH/calculus-mastery-workbook.git
+cd calculus-mastery-workbook
 ```
 
 Open `index.html` directly in any modern web browser or serve the directory with a local static server.
+
+---
+
+## ⚖️ Disclaimer
+
+This project is an independent, non-commercial educational resource created strictly for personal study and practice purposes. All mathematical problems and step-by-step solutions in this workbook are original practice exercises aligned with standard university Calculus I curricula. This project is **not** affiliated with, endorsed by, sponsored by, or associated with Pearson Education, Inc. or the authors/publishers of any commercial textbook. All product names, trademarks, and registered trademarks are the property of their respective owners.
